@@ -1,0 +1,28 @@
+---
+interface Props {
+  num?: string;
+  kicker: string;
+  headline: string;
+  sub?: string;
+  /** Number of trailing words to set in the accent style */
+  accent?: number;
+  as?: 'h1' | 'h2';
+  id?: string;
+  class?: string;
+}
+const { num, kicker, headline, sub, accent = 1, as: Tag = 'h2', id, class: cls } = Astro.props;
+const words = headline.split(' ');
+const head = words.slice(0, Math.max(0, words.length - accent)).join(' ');
+const tail = words.slice(Math.max(0, words.length - accent)).join(' ');
+---
+
+<div class:list={['max-w-5xl', cls]}>
+  <p class="kicker" data-reveal>
+    {num && <span class="num">{num}</span>}
+    <span>{kicker}</span>
+  </p>
+  <Tag id={id} class="h-section mt-6" data-reveal style="--d:1">
+    {head && <>{head} </>}<span class="accent">{tail}</span>
+  </Tag>
+  {sub && <p class="lede mt-6 max-w-2xl" data-reveal style="--d:2">{sub}</p>}
+</div>

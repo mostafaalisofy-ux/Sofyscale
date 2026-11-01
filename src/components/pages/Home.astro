@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../sections/Hero.astro';
+import About from '../sections/About.astro';
+import Expertise from '../sections/Expertise.astro';
+import AiGrowth from '../sections/AiGrowth.astro';
+import Stack from '../sections/Stack.astro';
+import Career from '../sections/Career.astro';
+import Clients from '../sections/Clients.astro';
+import Regional from '../sections/Regional.astro';
+import Results from '../sections/Results.astro';
+import CasesTeaser from '../sections/CasesTeaser.astro';
+import Sessions from '../sections/Sessions.astro';
+import Faq from '../sections/Faq.astro';
+import Contact from '../sections/Contact.astro';
+import type { Lang } from '../../data/types';
+import { webpSrcset } from '../../data/site';
+import { getContent } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = getContent(lang);
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: c.faq.items.map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+---
+
+<Base
+  lang={lang}
+  path="/"
+  title={c.meta.title}
+  description={c.meta.description}
+  ogType="profile"
+  onHome
+  jsonLd={[faqLd]}
+  preloadImage={{ srcset: webpSrcset('hero'), sizes: '(min-width: 1024px) 38vw, (min-width: 640px) 28rem, 92vw' }}
+>
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Expertise lang={lang} />
+  <AiGrowth lang={lang} />
+  <Stack lang={lang} />
+  <Career lang={lang} />
+  <Clients lang={lang} />
+  <Regional lang={lang} />
+  <Results lang={lang} />
+  <CasesTeaser lang={lang} />
+  <Sessions lang={lang} />
+  <Faq lang={lang} />
+  <Contact lang={lang} />
+</Base>

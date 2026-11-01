@@ -1,0 +1,56 @@
+---
+import type { Lang } from '../../data/types';
+import { SITE } from '../../data/site';
+import { getContent } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = getContent(lang);
+const k = c.contact;
+const words = k.headline.split(' ');
+const tail = words.pop();
+
+const rows = [
+  { label: k.email, value: SITE.email, href: `mailto:${SITE.email}`, ltr: true },
+  { label: k.whatsapp, value: SITE.whatsappDisplay, href: SITE.whatsappUrl, ltr: true, external: true },
+  { label: k.linkedin, value: 'linkedin.com/in/mostafasofy', href: SITE.linkedin, ltr: true, external: true },
+  { label: k.profile, value: k.profileCta, href: SITE.profilePdf, download: true },
+];
+---
+
+<section id="contact" class="section relative isolate overflow-hidden border-t border-line" aria-labelledby="contact-title">
+  <div class="glow -bottom-60 left-1/2 -z-10 h-[46rem] w-[60rem] -translate-x-1/2 opacity-70"></div>
+  <div class="wrap">
+    <p class="kicker" data-reveal><span class="num">12</span><span>{k.kicker}</span></p>
+    <h2 id="contact-title" class="display mt-8 max-w-6xl text-[clamp(3.5rem,11vw,10rem)] leading-[0.92] tracking-[-0.035em] rtl:text-[clamp(3rem,8vw,7rem)] rtl:leading-[1.25] rtl:tracking-normal" data-reveal style="--d:1">
+      {words.join(' ')} <span class="accent">{tail}</span>
+    </h2>
+    <p class="lede mt-8 max-w-2xl" data-reveal style="--d:2">{k.sub}</p>
+
+    <div class="mt-12 flex flex-wrap gap-3" data-reveal style="--d:3">
+      <a href="#book" class="btn btn-primary">{c.ctaPrimary}</a>
+      <a href={SITE.whatsappUrl} target="_blank" rel="noopener" class="btn btn-ghost">{k.whatsapp}</a>
+    </div>
+
+    <ul class="mt-20 grid border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+      {rows.map((r, i) => (
+        <li class:list={['border-b border-line lg:border-b-0', i > 0 && 'lg:border-s', i % 2 === 1 && 'sm:border-s']}>
+          <a
+            href={r.href}
+            target={r.external ? '_blank' : undefined}
+            rel={r.external ? 'noopener' : undefined}
+            download={r.download ? '' : undefined}
+            class="group block py-8 transition-colors hover:bg-white/[0.02] sm:px-6"
+          >
+            <span class="text-xs uppercase tracking-[0.18em] text-muted">{r.label}</span>
+            <span class="mt-3 flex items-center justify-between gap-3 text-[1.0625rem] text-fg transition-colors group-hover:text-violet-soft">
+              {r.ltr ? <bdi dir="ltr" class="break-all">{r.value}</bdi> : <span>{r.value}</span>}
+              <svg class="flex-none transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M4 10L10 4M10 4H5M10 4v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-10 text-xs uppercase tracking-[0.18em] text-muted">{c.locations}</p>
+  </div>
+</section>

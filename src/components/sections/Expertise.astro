@@ -1,0 +1,29 @@
+---
+import type { Lang } from '../../data/types';
+import { getContent } from '../../i18n';
+import SectionHead from '../SectionHead.astro';
+
+interface Props { lang: Lang }
+const c = getContent(Astro.props.lang);
+const e = c.expertise;
+---
+
+<section id="expertise" class="section border-t border-line" aria-labelledby="expertise-title">
+  <div class="wrap">
+    <SectionHead num="02" kicker={e.kicker} headline={e.headline} accent={2} id="expertise-title" />
+    <ol class="mt-16 grid gap-px overflow-hidden border-y border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      {e.items.map((item, i) => (
+        <li
+          class="group relative bg-ink px-1 py-10 transition-colors duration-500 hover:bg-ink-2 sm:px-6"
+        >
+          <div data-reveal style={`--d:${i % 4}`}>
+            <span class="text-xs text-violet-soft tnum"><bdi dir="ltr">{String(i + 1).padStart(2, '0')}</bdi></span>
+            <h3 class="display mt-6 text-3xl leading-tight">{item.title}</h3>
+            <p class="mt-4 max-w-xs text-[0.9375rem] leading-relaxed text-muted">{item.body}</p>
+          </div>
+          <span class="absolute bottom-0 start-0 h-px w-0 bg-violet-soft transition-[width] duration-700 ease-out group-hover:w-full" aria-hidden="true"></span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

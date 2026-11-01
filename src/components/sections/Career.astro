@@ -1,0 +1,42 @@
+---
+import type { Lang } from '../../data/types';
+import { getContent } from '../../i18n';
+import SectionHead from '../SectionHead.astro';
+
+interface Props { lang: Lang }
+const c = getContent(Astro.props.lang);
+const k = c.career;
+---
+
+<section id="career" class="section border-t border-line" aria-labelledby="career-title">
+  <div class="wrap grid gap-14 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-5">
+      <div class="lg:sticky lg:top-28">
+        <SectionHead num="05" kicker={k.kicker} headline={k.headline} accent={3} id="career-title" />
+      </div>
+    </div>
+    <ol class="lg:col-span-7">
+      {k.items.map((item, i) => (
+        <li class="group grid grid-cols-[2.5rem_1fr] gap-4 border-t border-line py-7 last:border-b sm:grid-cols-[3.5rem_1fr_auto] sm:gap-6" data-reveal>
+          <span class="pt-1.5 text-xs text-muted tnum"><bdi dir="ltr">{String(i + 1).padStart(2, '0')}</bdi></span>
+          <div>
+            <h3 class="display flex flex-wrap items-center gap-3 text-[1.875rem] leading-tight transition-colors group-hover:text-violet-soft sm:text-4xl">
+              {item.company}
+              {item.current && (
+                <span class="inline-flex items-center gap-1.5 rounded-full border border-violet-2/50 bg-violet/10 px-2.5 py-1 font-sans text-[0.6875rem] font-medium tracking-normal text-violet-soft">
+                  <span class="pulse h-1.5 w-1.5 rounded-full bg-violet-soft" aria-hidden="true"></span>
+                  {k.currentLabel}
+                </span>
+              )}
+            </h3>
+            <p class="mt-2 text-[0.9375rem] text-muted">
+              {item.role && <span class="text-fg-2">{item.role} · </span>}
+              {item.desc}
+            </p>
+          </div>
+          <span class="col-start-2 text-xs uppercase tracking-[0.16em] text-muted sm:col-start-3 sm:pt-2 sm:text-end">{item.market}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

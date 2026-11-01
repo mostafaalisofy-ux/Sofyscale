@@ -1,0 +1,36 @@
+---
+import type { Lang } from '../../data/types';
+import { getContent } from '../../i18n';
+import SectionHead from '../SectionHead.astro';
+
+interface Props { lang: Lang }
+const c = getContent(Astro.props.lang);
+const s = c.stack;
+---
+
+<section id="stack" class="section border-t border-line" aria-labelledby="stack-title">
+  <div class="wrap">
+    <SectionHead num="04" kicker={s.kicker} headline={s.headline} accent={2} sub={s.intro} id="stack-title" />
+
+    <div class="mt-16 grid gap-px overflow-hidden rounded-[1.5rem] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+      {s.groups.map((g, i) => (
+        <div class="bg-ink p-7 sm:p-9"><div data-reveal style={`--d:${i % 3}`}>
+          <h3 class="text-lg font-medium">{g.name}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{g.desc}</p>
+          <ul class="mt-7 flex flex-wrap gap-2">
+            {g.tools.map((t) => <li class="rounded-full border border-line-2 px-3 py-1.5 text-[0.8125rem] text-fg-2">{t}</li>)}
+          </ul>
+        </div></div>
+      ))}
+    </div>
+
+    <p class="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs uppercase tracking-[0.18em] text-muted" data-reveal>
+      {s.footer.map((f, i) => (
+        <>
+          {i > 0 && <span aria-hidden="true" class="text-violet-soft">·</span>}
+          <span>{f}</span>
+        </>
+      ))}
+    </p>
+  </div>
+</section>

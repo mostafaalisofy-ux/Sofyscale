@@ -1,0 +1,161 @@
+---
+import Base from '../../layouts/Base.astro';
+import CaseCard from '../CaseCard.astro';
+import type { Lang } from '../../data/types';
+import { CASES, FILTERS, t, type CaseStudy } from '../../data/cases';
+import { getContent, href } from '../../i18n';
+
+interface Props { lang: Lang; item: CaseStudy }
+const { lang, item } = Astro.props;
+const c = getContent(lang);
+const d = c.caseDetail;
+const site = Astro.site ?? new URL('https://sofy.netlify.app');
+
+const idx = CASES.findIndex((x) => x.slug === item.slug);
+const prev = CASES[(idx - 1 + CASES.length) % CASES.length];
+const next = CASES[(idx + 1) % CASES.length];
+const related = CASES.filter((x) => x.slug !== item.slug && x.disciplines.some((dd) => item.disciplines.includes(dd)))
+  .concat(CASES.filter((x) => x.slug !== item.slug))
+  .filter((x, i, arr) => arr.findIndex((y) => y.slug === x.slug) === i)
+  .slice(0, 3);
+
+const title = t(item.title, lang);
+const headline = t(item.headline, lang);
+const pageTitle = `${title} · ${headline} · ${lang === 'ar' ? 'مصطفى صوفي' : 'Mostafa Sofy'}`;
+const tags = [
+  ...item.disciplines.map((k) => FILTERS.discipline.find((f) => f.key === k)!),
+  ...item.industries.map((k) => FILTERS.industry.find((f) => f.key === k)!),
+].filter((v, i, a) => a.findIndex((x) => t(x.label, lang) === t(v.label, lang)) === i);
+
+const url = (p: string) => new URL(href(lang, p), site).href;
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `${title}: ${headline}`,
+    description: t(item.summary, lang),
+    inLanguage: lang,
+    url: url(`/case-studies/${item.slug}`),
+    image: new URL('/og-cover.jpg', site).href,
+    author: { '@id': `${new URL('/', site).href}#person` },
+    publisher: { '@id': `${new URL('/', site).href}#person` },
+    about: t(item.category, lang),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Sofy.', item: url('/') },
+      { '@type': 'ListItem', position: 2, name: c.nav.cases, item: url('/case-studies') },
+      { '@type': 'ListItem', position: 3, name: title, item: url(`/case-studies/${item.slug}`) },
+    ],
+  },
+];
+const arrow = 'M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5';
+---
+
+<Base lang={lang} path={`/case-studies/${item.slug}`} title={pageTitle} description={t(item.summary, lang)} ogType="article" jsonLd={ld}>
+  <article>
+    <header class="relative isolate overflow-hidden pb-16 pt-32 sm:pt-40">
+      <div class="glow -top-40 end-[-10%] -z-10 h-[36rem] w-[36rem] opacity-60"></div>
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" class="rise-fade">
+          <a href={href(lang, '/case-studies')} class="inline-flex items-center gap-2 text-sm text-fg-2 hover:text-fg">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="-scale-x-100 rtl:scale-x-100"><path d={arrow} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            {d.back}
+          </a>
+        </nav>
+
+        <div class="mt-14 grid gap-10 lg:grid-cols-12">
+          <div class="lg:col-span-8">
+            <p class="kicker rise-fade"><span class="num"><bdi dir="ltr">{item.num}</bdi></span><span>{t(item.market, lang)}</span></p>
+            <h1 class="rise mt-6">
+              <span class="block text-lg text-fg-2 sm:text-xl">{title}</span>
+              <span class="h-section mt-4 block !text-[clamp(2.75rem,7vw,6.5rem)]">{headline}</span>
+            </h1>
+          </div>
+          <dl class="rise-fade grid content-end gap-6 text-sm lg:col-span-4" style="--d:2">
+            <div class="border-t border-line pt-4">
+              <dt class="text-xs uppercase tracking-[0.16em] text-muted">{d.market}</dt>
+              <dd class="mt-2 text-fg">{t(item.market, lang)}</dd>
+            </div>
+            <div class="border-t border-line pt-4">
+              <dt class="text-xs uppercase tracking-[0.16em] text-muted">{d.category}</dt>
+              <dd class="mt-2 text-fg">{t(item.category, lang)}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </header>
+
+    <section class="pb-20" aria-labelledby="metrics-title">
+      <div class="wrap">
+        <h2 id="metrics-title" class="sr-only">{d.metrics}</h2>
+        <ul class="grid gap-px overflow-hidden rounded-[1.5rem] border border-line bg-line md:grid-cols-3">
+          {item.metrics.map((m, i) => (
+            <li class:list={['relative isolate overflow-hidden bg-ink p-8 sm:p-10', i === 0 && 'bg-ink-2']}>
+              {i === 0 && <div class="glow -bottom-24 -end-24 -z-10 h-72 w-72 opacity-80"></div>}
+              <div data-reveal style={`--d:${i}`}>
+                <p class="display text-[clamp(3rem,7vw,5.5rem)] leading-none tnum"><bdi dir="ltr">{t(m.value, lang)}</bdi></p>
+                {m.label && <p class="mt-4 text-sm text-fg-2">{t(m.label, lang)}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="pb-24" aria-labelledby="summary-title">
+      <div class="wrap grid gap-10 lg:grid-cols-12">
+        <h2 id="summary-title" class="kicker self-start lg:col-span-3" data-reveal>{d.summary}</h2>
+        <div class="lg:col-span-8 lg:col-start-5">
+          <p class="display text-[clamp(1.75rem,3.4vw,2.9rem)] leading-[1.2] text-fg rtl:leading-[1.6]" data-reveal>{t(item.summary, lang)}</p>
+          <ul class="mt-10 flex flex-wrap gap-2" data-reveal>
+            {tags.map((tg) => <li class="chip">{t(tg.label, lang)}</li>)}
+          </ul>
+          <p class="mt-12 border-t border-line pt-6 text-sm leading-relaxed text-muted">{c.casesPage.disclaimer}</p>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <section class="border-t border-line" aria-label={`${d.prev} / ${d.next}`}>
+    <div class="wrap grid sm:grid-cols-2">
+      <a href={href(lang, `/case-studies/${prev.slug}`)} class="group border-b border-line py-10 sm:border-b-0 sm:pe-8">
+        <span class="flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-muted">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="-scale-x-100 rtl:scale-x-100"><path d={arrow} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          {d.prev}
+        </span>
+        <span class="display mt-3 block text-2xl transition-colors group-hover:text-violet-soft sm:text-3xl">{t(prev.title, lang)}</span>
+      </a>
+      <a href={href(lang, `/case-studies/${next.slug}`)} class="group py-10 text-end sm:border-s sm:border-line sm:ps-8">
+        <span class="flex items-center justify-end gap-2 text-xs uppercase tracking-[0.16em] text-muted">
+          {d.next}
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="rtl:-scale-x-100"><path d={arrow} stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </span>
+        <span class="display mt-3 block text-2xl transition-colors group-hover:text-violet-soft sm:text-3xl">{t(next.title, lang)}</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section border-t border-line" aria-labelledby="more-title">
+    <div class="wrap">
+      <h2 id="more-title" class="h-section !text-[clamp(2rem,4vw,3.25rem)]" data-reveal>{d.more}</h2>
+      <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {related.map((r, i) => <li data-reveal style={`--d:${i}`}><CaseCard item={r} lang={lang} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="relative isolate overflow-hidden border-t border-line py-24 sm:py-32" aria-labelledby="cta-title">
+    <div class="glow left-1/2 top-0 -z-10 h-[36rem] w-[50rem] -translate-x-1/2 opacity-60"></div>
+    <div class="wrap text-center">
+      <h2 id="cta-title" class="h-section mx-auto max-w-4xl" data-reveal>{d.ctaTitle}</h2>
+      <p class="lede mx-auto mt-6 max-w-2xl" data-reveal style="--d:1">{d.ctaBody}</p>
+      <div class="mt-10 flex flex-wrap justify-center gap-3" data-reveal style="--d:2">
+        <a href={`${href(lang, '/')}#book`} class="btn btn-primary">{c.ctaPrimary}</a>
+        <a href={href(lang, '/case-studies')} class="btn btn-ghost">{c.ctaSecondary}</a>
+      </div>
+    </div>
+  </section>
+</Base>

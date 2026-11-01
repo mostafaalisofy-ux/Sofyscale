@@ -1,0 +1,72 @@
+# Items to confirm before launch
+
+Everything below is **live on the site as written** (except where noted), because `site-content.md` marks it `[CONFIRM]`. The marker itself is never rendered, and a post-build check (`scripts/check-copy.mjs`) fails the build if "TO CONFIRM" or "[CONFIRM]" ever reaches the HTML.
+
+To change any value, edit `src/data/content.en.ts`, `src/data/content.ar.ts` or `src/data/cases.ts`, then rebuild.
+
+---
+
+## 1. Figures marked [CONFIRM] in site-content.md
+
+| # | Where it appears | Content as published | File |
+|---|---|---|---|
+| 1 | Hero stat chips | **SAR 24M+** single-brand revenue | `content.*.ts` → `hero.chips` |
+| 2 | About stats | **4 Markets** (KSA · EG · Libya · GCC) | `content.*.ts` → `about.stats` |
+| 3 | AI in Growth, 01 (Problem) | Manual production caps testing at **5–10 variants per week** | `content.*.ts` → `ai.items[0]` |
+| 4 | AI in Growth, 01 (How it works) | **30–50** brief-ready variants weekly; briefs generated from **Mixpanel** drop-off signals | `content.*.ts` → `ai.items[0]` |
+| 5 | AI in Growth, 02 (Problem) | Teams burn **6–10 hours a week** on reports | `content.*.ts` → `ai.items[1]` |
+| 6 | AI in Growth, 03 (Problem) | Senior buyers spend **60%** of their time monitoring | `content.*.ts` → `ai.items[2]` |
+| 7 | AI in Growth, closing line | "None of these are theoretical. Each one was built inside a live engagement, against a live P&L, under a real budget." | `content.*.ts` → `ai.closing` |
+| 8 | Results | **4 Regional Markets** (KSA · EG · Libya · GCC) | `content.*.ts` → `results.stats` |
+| 9 | Results | **SAR 24M+** Peak Campaign Revenue, single-brand revenue in **11 months** | `content.*.ts` → `results.stats` |
+| 10 | Strategic Sessions | Scarcity note: "Due to ongoing regional projects and leadership commitments, only a limited number of strategic sessions are available each month." | `content.*.ts` → `sessions.scarcity` |
+
+## 2. Career (all dates and titles)
+
+The source says to confirm **all dates and titles**. No dates are shown anywhere. These titles are shown:
+
+- **Steps (KSA):** Managing Director, labelled "Current" (Arabic: العضو المنتدب)
+- **Infinity Performance (KSA):** Country Manager (Arabic: المدير القُطري)
+- The other six roles show the company, market and description only. Please also confirm the company order and markets.
+
+If you send dates, they can be added to `career.items` in both content files.
+
+## 3. Selected Clients
+
+The whole block is marked [CONFIRM]:
+
+Buffalo Burger, Juhayna, Edita Foods, Costa Coffee, Toyota, BYD, DAMAC, STC, QNB, Air Arabia, Radisson Blu, Saudi GEA, plus the note "Full roster spans 200+ brands".
+
+Worth checking: the Case Studies page says "Client identities and brand names are kept confidential." Please make sure you have permission to name these brands publicly, and that none of them can be matched to a specific anonymized case study.
+
+## 4. Case study headlines
+
+| Case | Headline as published | Note |
+|---|---|---|
+| 01 Consumer Electronics Retailer | **SAR 8M in 6 months** | ⚠️ **Inconsistent:** the metrics show **SAR 2.96M** revenue. Either the headline or the metric needs correcting. |
+| 02 Perfume Brand | SAR 24M+ in 11 months | Same figure as the hero and Results stats. |
+| 04 Gen-Z Fashion Brand | SAR 3.2M · 5,000+ orders | |
+| 05 Fashion Brand | 6.49x average ROAS across the operation | |
+| 07 Cosmetics Brand (Libya) | EGP 5M+ via messaging-led conversion | Market is Libya but the figure is in EGP. Please confirm the currency. |
+| 10 Education Academy (GCC) | 5.29M impressions · 1.13M reach | Spend is shown as EGP 290K for a GCC campaign. Please confirm the currency. |
+| 14 Quick-Service Restaurant Chain | 250 influencers, one drive-thru moment, two hours | |
+| 16 Toys & Kids Retailer | 750 influencers, 4 days, one message: "we're in KSA" | |
+
+## 5. Hidden until confirmed
+
+- **"How the session works"** (Duration, Cost, Format, What you get). The source says to hide this block until confirmed, so it is **not rendered**. Send the four values and it can be added above the intake form.
+
+---
+
+## 6. Decisions I made that you should review
+
+These were not specified in `site-content.md`:
+
+1. **Budget range (intake form, step 2)** is a free-text field, because the source gives no ranges. If you want fixed options (for example SAR bands), send them and it will become a choice list.
+2. **Form microcopy** that isn't in the source: button labels ("Continue", "Back", "Submit application"), "Step 1 of 3", the form title "Apply for a strategic session", validation and error text, and the success message ("Thank you. I review every application personally and will reply by email or WhatsApp."). Same for the Arabic equivalents.
+3. **"How it works"** is the label used for the "Detail" field in the AI in Growth cards.
+4. **Featured case studies on the home page:** 02, 07, 12, 03, 11, 13 (`FEATURED` in `src/data/cases.ts`).
+5. **Case study filter tagging.** Multi-tagged where the category lists several, for example 13 Food Delivery is tagged KSA and GCC. 14 QSR is tagged Influencer Marketing (discipline) and F&B (industry). 15, 16 and 17 are tagged Retail.
+6. **Arabic translation.** Professional Gulf-friendly MSA throughout. Brand and company names stay in Latin script, except Al-Jazeera Paints → دهانات الجزيرة. Figures stay as Latin numerals ("13x", "SAR 24M+") for consistency with ad-platform reporting. A native-speaker read is recommended.
+7. **Site URL.** On Netlify the site uses Netlify's own `URL` variable automatically. Set `SITE_URL` once you have a custom domain (see README).
+8. **Assets.** All 4 asset files are placeholders, because the build environment could not reach sofy.lovable.app (see README → "Replace the placeholder assets").

@@ -1,0 +1,35 @@
+---
+import type { Lang } from '../../data/types';
+import { getContent } from '../../i18n';
+import SectionHead from '../SectionHead.astro';
+
+interface Props { lang: Lang }
+const c = getContent(Astro.props.lang);
+const f = c.faq;
+---
+
+<section id="faq" class="section border-t border-line" aria-labelledby="faq-title">
+  <div class="wrap grid gap-14 lg:grid-cols-12 lg:gap-10">
+    <div class="lg:col-span-5">
+      <div class="lg:sticky lg:top-28">
+        <SectionHead num="11" kicker={f.kicker} headline={f.headline} accent={2} sub={f.sub} id="faq-title" />
+      </div>
+    </div>
+    <div class="lg:col-span-7">
+      {f.items.map((item, i) => (
+        <details class="group border-t border-line last:border-b" data-reveal open={i === 0}>
+          <summary class="flex items-start justify-between gap-6 py-7">
+            <span class="flex gap-5">
+              <span class="pt-1.5 text-xs text-muted tnum"><bdi dir="ltr">{String(i + 1).padStart(2, '0')}</bdi></span>
+              <span class="display text-2xl leading-snug transition-colors group-hover:text-violet-soft sm:text-3xl">{item.q}</span>
+            </span>
+            <span class="plus mt-1 grid h-9 w-9 flex-none place-items-center rounded-full border border-line-2" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-8 ps-9 text-[1.0625rem] leading-relaxed text-fg-2 sm:ps-10">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

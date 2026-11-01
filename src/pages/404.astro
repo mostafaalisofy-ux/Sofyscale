@@ -1,0 +1,6 @@
+---
+import Message from '../components/pages/Message.astro';
+import { getContent } from '../i18n';
+const c = getContent('en');
+---
+<Message lang="en" path="/404" title={c.ui.notFoundTitle} body={c.ui.notFoundBody} kicker="404" />
