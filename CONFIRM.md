@@ -21,15 +21,22 @@ To change any value, edit `src/data/content.en.ts`, `src/data/content.ar.ts` or 
 | 9 | Results | **SAR 24M+** Peak Campaign Revenue, single-brand revenue in **11 months** | `content.*.ts` → `results.stats` |
 | 10 | Strategic Sessions | Scarcity note: "Due to ongoing regional projects and leadership commitments, only a limited number of strategic sessions are available each month." | `content.*.ts` → `sessions.scarcity` |
 
-## 2. Career (all dates and titles)
+## 2. Career ✅ resolved from the Executive Profile (2026)
 
-The source says to confirm **all dates and titles**. No dates are shown anywhere. These titles are shown:
+Dates, titles and markets now come from `Sofy-Executive-Profile.pdf`, which you approved as a source. Changes from the original site-content.md:
 
-- **Steps (KSA):** Managing Director, labelled "Current" (Arabic: العضو المنتدب)
-- **Infinity Performance (KSA):** Country Manager (Arabic: المدير القُطري)
-- The other six roles show the company, market and description only. Please also confirm the company order and markets.
+- Every role now shows its period and title. Steps is shown as "2025 – Present" (Arabic: "منذ 2025").
+- **Added** Infinity Corp: Country Manager & Head of Business Development, KSA, 2023–2025. It has no description because the profile gives none.
+- **BirdMilk Advertising Agency** market changed from "KSA / EG" to **Egypt**.
+- **Al-Jazeera Paints** market changed from "KSA" to **KSA · Egypt**.
+- **Steps** market is now "Riyadh · KSA".
+- The company name stays "Steps" (the profile says "Steps Saudi") to match the hero line "Currently leading Steps".
 
-If you send dates, they can be added to `career.items` in both content files.
+Arabic titles: العضو المنتدب، المدير القُطري، المدير القُطري ورئيس تطوير الأعمال، رئيس تطوير الأعمال، مدير تطوير الأعمال، مدير المبيعات، مسؤول أول تطوير أعمال المشاريع، مطوّر أعمال أول.
+
+### ⚠️ Still open: number of markets
+
+The Executive Profile says **2 regional markets (KSA & Egypt)**. The site says **4 markets (KSA · EG · Libya · GCC)** in the About stats, the Results stats and the Case Studies header, and the case studies themselves include Libya and GCC work. Pick one number and it will be updated everywhere.
 
 ## 3. Selected Clients
 

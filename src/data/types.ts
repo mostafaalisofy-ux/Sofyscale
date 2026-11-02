@@ -44,7 +44,8 @@ export interface Content {
     kicker: string;
     headline: string;
     currentLabel: string;
-    items: { company: string; market: string; desc: string; role?: string; current?: boolean }[];
+    presentLabel: string;
+    items: { company: string; market: string; desc?: string; role: string; from: number; to?: number; current?: boolean }[];
   };
   clients: { kicker: string; headline: string; names: string[]; note: string };
   regional: { kicker: string; headline: string; tagline: string; items: { title: string; body: string }[] };
