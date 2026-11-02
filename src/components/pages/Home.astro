@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../sections/Hero.astro';
+import Snapshot from '../sections/Snapshot.astro';
+import About from '../sections/About.astro';
+import Leadership from '../sections/Leadership.astro';
+import Career from '../sections/Career.astro';
+import Impact from '../sections/Impact.astro';
+import FeaturedCases from '../sections/FeaturedCases.astro';
+import Philosophy from '../sections/Philosophy.astro';
+import Insights from '../sections/Insights.astro';
+import Contact from '../sections/Contact.astro';
+import type { Lang } from '../../data/types';
+import { webpSrcset } from '../../data/site';
+import { getContent } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = getContent(lang);
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lang,
+  mainEntity: c.contact.faq.map((i) => ({
+    '@type': 'Question',
+    name: i.q,
+    acceptedAnswer: { '@type': 'Answer', text: i.a },
+  })),
+};
+---
+
+<Base
+  lang={lang}
+  path="/"
+  title={c.meta.title}
+  description={c.meta.description}
+  ogType="profile"
+  onHome
+  jsonLd={[faqLd]}
+  preloadImage={{ srcset: webpSrcset('hero'), sizes: '(min-width: 1024px) 38vw, (min-width: 640px) 28rem, 92vw' }}
+>
+  <Hero lang={lang} />
+  <Snapshot lang={lang} />
+  <About lang={lang} />
+  <Leadership lang={lang} />
+  <Career lang={lang} />
+  <Impact lang={lang} />
+  <FeaturedCases lang={lang} />
+  <Philosophy lang={lang} />
+  <Insights lang={lang} />
+  <Contact lang={lang} />
+</Base>

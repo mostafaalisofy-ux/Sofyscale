@@ -1,0 +1,33 @@
+---
+import { IMAGES } from '../data/site';
+
+interface Props {
+  image: keyof typeof IMAGES;
+  alt: string;
+  sizes: string;
+  width: number;
+  height: number;
+  class?: string;
+  priority?: boolean;
+}
+const { image, alt, sizes, width, height, class: cls, priority = false } = Astro.props;
+const img = IMAGES[image];
+const srcset = (ext: string) => img.widths.map((w) => `/img/${img.base}-${w}.${ext} ${w}w`).join(', ');
+const largest = img.widths[img.widths.length - 1];
+---
+
+<picture>
+  <source type="image/webp" srcset={srcset('webp')} sizes={sizes} />
+  <img
+    src={`/img/${img.base}-${largest}.jpg`}
+    srcset={srcset('jpg')}
+    sizes={sizes}
+    alt={alt}
+    width={width}
+    height={height}
+    class={cls}
+    loading={priority ? 'eager' : 'lazy'}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : 'auto'}
+  />
+</picture>

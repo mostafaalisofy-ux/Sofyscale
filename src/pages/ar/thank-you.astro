@@ -1,0 +1,6 @@
+---
+import Message from '../../components/pages/Message.astro';
+import { getContent } from '../../i18n';
+const c = getContent('ar');
+---
+<Message lang="ar" path="/thank-you" title={c.ui.thanksTitle} body={c.ui.thanksBody} />

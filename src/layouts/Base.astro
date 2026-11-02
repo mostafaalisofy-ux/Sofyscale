@@ -1,0 +1,167 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource/instrument-serif/latin-400.css';
+import '@fontsource/instrument-serif/latin-400-italic.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-400.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-500.css';
+import '@fontsource/ibm-plex-sans-arabic/arabic-600.css';
+import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import serifUrl from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import arabicUrl from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-400-normal.woff2?url';
+import arabic500Url from '@fontsource/ibm-plex-sans-arabic/files/ibm-plex-sans-arabic-arabic-500-normal.woff2?url';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsApp from '../components/WhatsApp.astro';
+import { SITE } from '../data/site';
+import type { Lang } from '../data/types';
+import { getContent, href, dir } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Locale-neutral path, e.g. "/" or "/case-studies/perfume-brand" */
+  path: string;
+  title: string;
+  description: string;
+  ogType?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+  preloadImage?: { srcset: string; sizes: string };
+  onHome?: boolean;
+}
+
+const { lang, path, title, description, ogType = 'website', noindex = false, jsonLd = [], preloadImage, onHome = false } = Astro.props;
+const c = getContent(lang);
+const site = Astro.site ?? new URL('https://sofy.netlify.app');
+const abs = (p: string) => new URL(p, site).href;
+const canonical = abs(href(lang, path));
+const enUrl = abs(href('en', path));
+const arUrl = abs(href('ar', path));
+const ogImage = abs(SITE.ogImage);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${abs('/')}#person`,
+  name: SITE.name,
+  alternateName: ['Sofy', 'مصطفى صوفي'],
+  jobTitle: 'Managing Director',
+  description: getContent('en').meta.description,
+  url: abs('/'),
+  image: abs('/img/hero-800.jpg'),
+  email: `mailto:${SITE.email}`,
+  telephone: SITE.phone,
+  sameAs: [SITE.linkedin],
+  worksFor: { '@type': 'Organization', name: 'Steps' },
+  workLocation: [
+    { '@type': 'Place', name: 'Riyadh', address: { '@type': 'PostalAddress', addressLocality: 'Riyadh', addressCountry: 'SA' } },
+    { '@type': 'Place', name: 'Cairo', address: { '@type': 'PostalAddress', addressLocality: 'Cairo', addressCountry: 'EG' } },
+  ],
+  knowsLanguage: ['en', 'ar'],
+  knowsAbout: [
+    'Marketing Leadership', 'Business Growth', 'Agency Management', 'Performance Marketing',
+    'Brand & Market Strategy', 'Business Development', 'Team Leadership', 'AI in Marketing Operations',
+  ],
+  areaServed: ['Saudi Arabia', 'United Arab Emirates', 'Egypt', 'GCC', 'MENA'],
+};
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${abs('/')}#website`,
+  name: 'Sofy.',
+  url: abs('/'),
+  inLanguage: ['en', 'ar'],
+  publisher: { '@id': `${abs('/')}#person` },
+};
+const graph = [person, website, ...jsonLd];
+---
+
+<!doctype html>
+<html lang={lang} dir={dir(lang)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="ar" href={arUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    <meta name="theme-color" content={SITE.themeColor} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="author" content={SITE.name} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Sofy." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${SITE.name} · ${c.role}`} />
+    <meta property="og:locale" content={lang === 'ar' ? 'ar_SA' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'ar' ? 'en_US' : 'ar_SA'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {lang === 'en' ? (
+      <>
+        <link rel="preload" href={serifUrl} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+      </>
+    ) : (
+      <>
+        <link rel="preload" href={serifUrl} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={arabicUrl} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={arabic500Url} as="font" type="font/woff2" crossorigin />
+      </>
+    )}
+    {preloadImage && (
+      <link rel="preload" as="image" type="image/webp" imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />
+    )}
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+  </head>
+  <body class="grain">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-[100] focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-ink">
+      {c.ui.skip}
+    </a>
+    <Header lang={lang} path={path} onHome={onHome} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} onHome={onHome} />
+    <WhatsApp lang={lang} />
+
+    <script>
+      // Scroll reveal. Content stays visible without JS (the `js` class gates the hidden state).
+      const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-in'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-in');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

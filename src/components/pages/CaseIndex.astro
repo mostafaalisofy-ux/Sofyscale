@@ -1,0 +1,157 @@
+---
+import Base from '../../layouts/Base.astro';
+import CaseCard from '../CaseCard.astro';
+import type { Lang } from '../../data/types';
+import { CASES, FILTERS, t } from '../../data/cases';
+import { getContent, href } from '../../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = getContent(lang);
+const p = c.casesPage;
+const site = Astro.site ?? new URL('https://sofy.netlify.app');
+
+const groups = [
+  { key: 'market', label: p.filters.market, options: FILTERS.market },
+  { key: 'discipline', label: p.filters.discipline, options: FILTERS.discipline },
+  { key: 'industry', label: p.filters.industry, options: FILTERS.industry },
+] as const;
+
+const listLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: p.headline,
+  description: p.sub,
+  inLanguage: lang,
+  url: new URL(href(lang, '/case-studies'), site).href,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: CASES.length,
+    itemListElement: CASES.map((cs, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: new URL(href(lang, `/case-studies/${cs.slug}`), site).href,
+      name: t(cs.title, lang),
+    })),
+  },
+};
+---
+
+<Base lang={lang} path="/case-studies" title={c.meta.caseIndexTitle} description={c.meta.caseIndexDescription} jsonLd={[listLd]}>
+  <section class="relative isolate overflow-hidden pb-16 pt-36 sm:pt-44" aria-labelledby="cases-title">
+    <div class="glow -top-40 start-[-10%] -z-10 h-[36rem] w-[36rem] opacity-60"></div>
+    <div class="wrap">
+      <p class="kicker rise-fade"><span>{p.kicker}</span></p>
+      <h1 id="cases-title" class="rise h-section mt-6 max-w-5xl !text-[clamp(3rem,9vw,8.5rem)]">
+        {p.headline.split(' ').slice(0, -2).join(' ')} <span class="accent">{p.headline.split(' ').slice(-2).join(' ')}</span>
+      </h1>
+      <p class="lede rise-fade mt-8 max-w-2xl" style="--d:1">{p.sub}</p>
+
+      <dl class="rise-fade mt-14 grid grid-cols-2 border-t border-line sm:grid-cols-4" style="--d:2">
+        {p.stats.map((s, i) => (
+          <div class:list={['border-line py-6 pe-4', i % 2 === 1 && 'border-s border-line ps-4 sm:ps-6', i >= 2 && 'border-t sm:border-t-0', i === 2 && 'sm:border-s sm:ps-6']}>
+            <dt class="sr-only">{s.label}</dt>
+            <dd>
+              <span class="display block whitespace-nowrap text-[clamp(2.25rem,10vw,3.75rem)] leading-none tnum"><bdi dir="ltr">{s.value}</bdi></span>
+              <span class="mt-2 block text-sm text-fg-2">{s.label}</span>
+              {s.note && <span class="block text-xs text-muted">{s.note}</span>}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="pb-24" aria-label={p.kicker}>
+    <div class="wrap">
+      <div class="filters sticky top-[4.5rem] z-30 -mx-[var(--gutter)] border-y border-line bg-ink/85 px-[var(--gutter)] py-5 backdrop-blur-xl">
+        <div class="grid min-w-0 grid-cols-1 gap-4">
+          {groups.map((g) => (
+            <div class="flex min-w-0 items-center gap-4" role="group" aria-label={g.label}>
+              <span class="w-20 flex-none text-xs uppercase tracking-[0.16em] text-muted sm:w-24">{g.label}</span>
+              <div class="-my-1 flex min-w-0 flex-1 gap-2 overflow-x-auto py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <button type="button" class="pill" data-group={g.key} data-value="all" aria-pressed="true">{p.filters.all}</button>
+                {g.options.map((o) => (
+                  <button type="button" class="pill" data-group={g.key} data-value={o.key} aria-pressed="false">{t(o.label, lang)}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-8 flex items-center justify-between gap-4 text-sm text-muted">
+        <p class="result-count" aria-live="polite" data-total={CASES.length}>{p.results(CASES.length)}</p>
+        <button type="button" class="reset hidden text-fg-2 underline decoration-line-2 underline-offset-4 hover:text-fg">{p.filters.reset}</button>
+      </div>
+
+      <ul class="case-grid mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {CASES.map((item) => (
+          <li class="case-item" data-market={item.markets.join(' ')} data-discipline={item.disciplines.join(' ')} data-industry={item.industries.join(' ')}>
+            <CaseCard item={item} lang={lang} headingLevel="h2" />
+          </li>
+        ))}
+      </ul>
+      <p class="empty mt-10 hidden rounded-[1.25rem] border border-dashed border-line-2 p-10 text-center text-fg-2">{p.empty}</p>
+
+      <p class="mt-16 max-w-3xl border-t border-line pt-8 text-sm leading-relaxed text-muted">{p.disclaimer}</p>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ lang }}>
+  const items = [...document.querySelectorAll('.case-item')];
+  const pills = [...document.querySelectorAll('.pill')];
+  const count = document.querySelector('.result-count');
+  const empty = document.querySelector('.empty');
+  const reset = document.querySelector('.reset');
+  const state = { market: 'all', discipline: 'all', industry: 'all' };
+
+  const plural = (n) => {
+    if (lang === 'ar') {
+      if (n === 1) return `${n} دراسة حالة`;
+      if (n === 2) return `${n} دراستا حالة`;
+      if (n >= 3 && n <= 10) return `${n} دراسات حالة`;
+      return `${n} دراسة حالة`;
+    }
+    return `${n} ${n === 1 ? 'case study' : 'case studies'}`;
+  };
+
+  const apply = (push) => {
+    let shown = 0;
+    for (const el of items) {
+      const ok = Object.entries(state).every(([k, v]) => v === 'all' || el.dataset[k].split(' ').includes(v));
+      el.hidden = !ok;
+      if (ok) shown++;
+    }
+    pills.forEach((p) => p.setAttribute('aria-pressed', String(state[p.dataset.group] === p.dataset.value)));
+    count.textContent = plural(shown);
+    empty.classList.toggle('hidden', shown > 0);
+    const active = Object.values(state).some((v) => v !== 'all');
+    reset.classList.toggle('hidden', !active);
+    if (push) {
+      const params = new URLSearchParams();
+      Object.entries(state).forEach(([k, v]) => v !== 'all' && params.set(k, v));
+      const qs = params.toString();
+      history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+    }
+  };
+
+  pills.forEach((p) =>
+    p.addEventListener('click', () => {
+      state[p.dataset.group] = p.dataset.value;
+      apply(true);
+    }),
+  );
+  reset.addEventListener('click', () => {
+    Object.keys(state).forEach((k) => (state[k] = 'all'));
+    apply(true);
+  });
+
+  const params = new URLSearchParams(location.search);
+  Object.keys(state).forEach((k) => {
+    const v = params.get(k);
+    if (v && pills.some((p) => p.dataset.group === k && p.dataset.value === v)) state[k] = v;
+  });
+  apply(false);
+</script>

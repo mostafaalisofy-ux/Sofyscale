@@ -1,0 +1,79 @@
+---
+import type { Lang } from '../../data/types';
+import { SITE } from '../../data/site';
+import { getContent } from '../../i18n';
+import SectionHead from '../SectionHead.astro';
+
+interface Props { lang: Lang }
+const c = getContent(Astro.props.lang);
+const s = c.insights;
+---
+
+<section id="insights" class="section section-alt border-y border-line" aria-labelledby="insights-title">
+  <div class="wrap">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <SectionHead kicker={s.kicker} headline={s.headline} accent={3} id="insights-title" class="lg:col-span-7" />
+      <div class="lg:col-span-5" data-reveal style="--d:2">
+        <p class="lede">{s.sub}</p>
+        <a href={SITE.linkedin} target="_blank" rel="noopener" class="link-arrow mt-5">
+          {s.follow}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" class="flip-rtl"><path d="M4 10L10 4M10 4H5M10 4v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12" data-reveal>
+      <h3 class="sr-only">{s.topicsLabel}</h3>
+      <ul class="flex flex-wrap gap-2">
+        {s.topics.map((tp, i) => (
+          <li class:list={['tag !px-3 !py-1.5 !text-[0.8125rem]', i === s.topics.length - 1 && 'tag-violet']}>{tp}</li>
+        ))}
+      </ul>
+    </div>
+
+    <article class="surface mt-10 overflow-hidden" aria-labelledby="insight-feature" data-reveal>
+      <div class="grid gap-10 p-6 sm:p-10 lg:grid-cols-12">
+        <header class="lg:col-span-4">
+          <p class="meta text-violet-2">{s.featureLabel}</p>
+          <h3 id="insight-feature" class="t-h3 mt-4 !text-[clamp(1.8rem,2.8vw,2.5rem)]">{s.featureTitle}</h3>
+          <p class="body mt-5">{s.featureIntro}</p>
+          <p class="mt-8 border-s-2 border-violet ps-4 text-sm leading-relaxed text-fg">{s.closing}</p>
+        </header>
+        <ol class="border-t border-line lg:col-span-8 lg:border-t-0">
+          {s.items.map((it, i) => (
+            <li class="border-b border-line last:border-b-0">
+              <details class="group" open={i === 0}>
+                <summary class="flex items-start justify-between gap-6 py-5">
+                  <span class="flex items-baseline gap-4">
+                    <span class="fig display text-xl text-violet-2 tnum"><bdi dir="ltr">{it.num}</bdi></span>
+                    <span>
+                      <span class="meta">{it.type}</span>
+                      <span class="mt-1 block text-lg font-medium text-fg transition-colors group-hover:text-violet-soft">{it.title}</span>
+                    </span>
+                  </span>
+                  <span class="plus mt-1 grid h-8 w-8 flex-none place-items-center rounded-[8px] border border-line-2" aria-hidden="true">
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+                  </span>
+                </summary>
+                <dl class="grid gap-5 pb-6 ps-9 sm:grid-cols-3">
+                  <div>
+                    <dt class="meta">{s.labels.problem}</dt>
+                    <dd class="mt-2 text-sm leading-relaxed text-fg-2">{it.problem}</dd>
+                  </div>
+                  <div>
+                    <dt class="meta text-violet-2">{s.labels.outcome}</dt>
+                    <dd class="mt-2 text-sm leading-relaxed text-fg">{it.outcome}</dd>
+                  </div>
+                  <div>
+                    <dt class="meta">{s.labels.detail}</dt>
+                    <dd class="mt-2 text-sm leading-relaxed text-muted">{it.detail}</dd>
+                  </div>
+                </dl>
+              </details>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </article>
+  </div>
+</section>
