@@ -11,97 +11,142 @@ export interface Content {
   name: string;
   role: string;
   locations: string;
-  nav: { about: string; cases: string; career: string; results: string; faq: string; contact: string };
+  nav: {
+    home: string;
+    about: string;
+    leadership: string;
+    impact: string;
+    cases: string;
+    insights: string;
+    contact: string;
+    profile: string;
+  };
   ctaPrimary: string;
   ctaSecondary: string;
+
+  /* 1. Hero */
   hero: {
-    eyebrow: string;
-    h1: string;
+    roles: string[];
+    title: [string, string];
     sub: string;
-    body: string;
-    chips: Stat[];
-    badges: Stat[];
+    ctaExplore: string;
+    ctaDiscuss: string;
+    current: string;
     portraitAlt: string;
   };
-  about: { kicker: string; headline: string; paragraphs: string[]; stats: Stat[]; portraitAlt: string };
-  expertise: { kicker: string; headline: string; items: { title: string; body: string }[] };
-  ai: {
+
+  /* 2. Executive snapshot */
+  snapshot: { label: string; stats: Stat[] };
+
+  /* 3. About */
+  about: {
     kicker: string;
     headline: string;
     intro: string;
-    labels: { problem: string; outcome: string; detail: string };
-    items: { num: string; type: string; title: string; problem: string; outcome: string; detail: string }[];
-    closing: string;
+    paragraphs: string[];
+    quote: string;
+    principles: { title: string; body: string }[];
+    portraitAlt: string;
+    more: string;
   };
-  stack: {
+
+  /* 4. Leadership & expertise */
+  leadership: {
     kicker: string;
     headline: string;
-    intro: string;
-    groups: { name: string; desc: string; tools: string[] }[];
-    footer: string[];
+    sub: string;
+    pillars: { title: string; summary: string; points: string[] }[];
+    stackTitle: string;
+    stack: { name: string; tools: string[] }[];
   };
+
+  /* 5. Career journey */
   career: {
     kicker: string;
     headline: string;
+    sub: string;
     currentLabel: string;
     presentLabel: string;
+    profileCta: string;
     items: { company: string; market: string; desc?: string; role: string; from: number; to?: number; current?: boolean }[];
   };
-  clients: { kicker: string; headline: string; names: string[]; note: string };
-  regional: { kicker: string; headline: string; tagline: string; items: { title: string; body: string }[] };
-  results: {
+
+  /* 6. Selected impact */
+  impact: {
     kicker: string;
     headline: string;
-    stats: Stat[];
-    pillars: { kicker: string; title: string; body: string }[];
-    industries: string[];
+    sub: string;
+    contributionLabel: string;
+    roleLabel: string;
+    items: { title: string; contribution: string; role: string }[];
+    note: string;
+    clientsTitle: string;
+    clients: string[];
+    clientsNote: string;
   };
-  casesTeaser: { kicker: string; headline: string; sub: string; viewAll: string };
-  sessions: {
+
+  /* 7. Selected case studies */
+  casesTeaser: { kicker: string; headline: string; sub: string; viewAll: string; view: string };
+
+  /* 8. Leadership philosophy */
+  philosophy: {
+    kicker: string;
+    lines: [string, string, string];
+    statement: string;
+    pillars: { title: string; body: string }[];
+  };
+
+  /* 9. Insights */
+  insights: {
     kicker: string;
     headline: string;
-    intro: string;
+    sub: string;
     topicsLabel: string;
-    topics: { title: string; body: string }[];
-    scarcityTag: string;
-    scarcity: string;
+    topics: string[];
+    featureLabel: string;
+    featureTitle: string;
+    featureIntro: string;
+    labels: { problem: string; outcome: string; detail: string };
+    items: { num: string; type: string; title: string; problem: string; outcome: string; detail: string }[];
+    closing: string;
+    follow: string;
   };
-  form: {
-    title: string;
-    stepOf: (n: number, total: number) => string;
-    steps: string[];
-    businessQ: string;
-    businessOptions: string[];
-    marketQ: string;
-    marketOptions: string[];
-    challengeQ: string;
-    budgetQ: string;
-    name: string;
-    email: string;
-    whatsapp: string;
-    company: string;
-    message: string;
-    optional: string;
-    next: string;
-    back: string;
-    submit: string;
-    sending: string;
-    successTitle: string;
-    successBody: string;
-    error: string;
-    required: string;
-  };
-  faq: { kicker: string; headline: string; sub: string; items: { q: string; a: string }[] };
+
+  /* 10. Opportunities & contact */
   contact: {
     kicker: string;
     headline: string;
     sub: string;
+    paths: {
+      executive: { title: string; audience: string; body: string; cta: string };
+      partnership: { title: string; audience: string; body: string; cta: string };
+    };
+    form: {
+      name: string;
+      company: string;
+      email: string;
+      position: string;
+      collaboration: string;
+      collaborationPlaceholder: string;
+      collaborationOptions: string[];
+      message: string;
+      optional: string;
+      required: string;
+      sending: string;
+      successTitle: string;
+      successBody: string;
+      error: string;
+    };
+    direct: string;
     email: string;
     whatsapp: string;
     linkedin: string;
     profile: string;
     profileCta: string;
+    faqTitle: string;
+    faq: { q: string; a: string }[];
   };
+
   casesPage: {
     kicker: string;
     headline: string;
@@ -117,8 +162,10 @@ export interface Content {
     back: string;
     market: string;
     category: string;
-    metrics: string;
-    summary: string;
+    discipline: string;
+    context: string;
+    overview: string;
+    impact: string;
     prev: string;
     next: string;
     more: string;
@@ -129,7 +176,6 @@ export interface Content {
     skip: string;
     menu: string;
     close: string;
-    langSwitch: string;
     langSwitchLabel: string;
     whatsappLabel: string;
     backToTop: string;

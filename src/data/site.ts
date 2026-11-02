@@ -9,7 +9,7 @@ export const SITE = {
   profilePdf: '/Sofy-Executive-Profile.pdf',
   ogImage: '/og-cover.jpg',
   themeColor: '#070709',
-  formName: 'strategic-session',
+  forms: { executive: 'executive-opportunity', partnership: 'strategic-partnership' },
 } as const;
 
 /** Source images as they lived on the old site. Optimized variants are generated into /public/img at build. */

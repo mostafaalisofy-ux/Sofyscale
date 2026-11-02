@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../../data/types';
+import { SITE } from '../../data/site';
 import { getContent } from '../../i18n';
 import SectionHead from '../SectionHead.astro';
 
@@ -9,41 +10,40 @@ const c = getContent(lang);
 const k = c.career;
 ---
 
-<section id="career" class="section border-t border-line" aria-labelledby="career-title">
-  <div class="wrap grid gap-14 lg:grid-cols-12 lg:gap-10">
+<section id="career" class="section" aria-labelledby="career-title">
+  <div class="wrap grid gap-14 lg:grid-cols-12 lg:gap-12">
     <div class="lg:col-span-5">
       <div class="lg:sticky lg:top-28">
-        <SectionHead num="05" kicker={k.kicker} headline={k.headline} accent={3} id="career-title" />
+        <SectionHead kicker={k.kicker} headline={k.headline} accent={2} sub={k.sub} id="career-title" />
+        <a href={SITE.profilePdf} download class="btn btn-ghost mt-10" data-reveal style="--d:3">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M2.5 13.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          {k.profileCta}
+        </a>
       </div>
     </div>
-    <ol class="lg:col-span-7">
+
+    <ol class="timeline lg:col-span-7">
       {k.items.map((item) => (
-        <li class="group grid gap-x-6 gap-y-2 border-t border-line py-7 last:border-b sm:grid-cols-[7.5rem_1fr_auto]" data-reveal>
-          <span class="text-xs text-muted tnum sm:pt-2.5">
+        <li class="group relative pb-7 ps-10 last:pb-0" data-reveal>
+          <span class:list={['timeline-dot', item.current && 'is-current']} aria-hidden="true"></span>
+          <p class="meta flex flex-wrap items-center gap-x-3 gap-y-1">
             {item.to ? (
-              <bdi dir="ltr">{item.from} – {item.to}</bdi>
+              <bdi dir="ltr" class="tnum">{item.from} – {item.to}</bdi>
             ) : lang === 'ar' ? (
-              <span class="text-violet-soft">{k.presentLabel} <bdi dir="ltr">{item.from}</bdi></span>
+              <span class="text-violet-2">{k.presentLabel} <bdi dir="ltr" class="tnum">{item.from}</bdi></span>
             ) : (
-              <span class="text-violet-soft"><bdi dir="ltr">{item.from}</bdi> – {k.presentLabel}</span>
+              <span class="text-violet-2"><bdi dir="ltr" class="tnum">{item.from}</bdi> – {k.presentLabel}</span>
             )}
-          </span>
-          <div>
-            <h3 class="display flex flex-wrap items-center gap-3 text-[1.875rem] leading-tight transition-colors group-hover:text-violet-soft sm:text-4xl">
-              <bdi>{item.company}</bdi>
-              {item.current && (
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-violet-2/50 bg-violet/10 px-2.5 py-1 font-sans text-[0.6875rem] font-medium tracking-normal text-violet-soft">
-                  <span class="pulse h-1.5 w-1.5 rounded-full bg-violet-soft" aria-hidden="true"></span>
-                  {k.currentLabel}
-                </span>
-              )}
+            <span aria-hidden="true">·</span>
+            <span>{item.market}</span>
+          </p>
+          <div class:list={['mt-2.5 rounded-[var(--radius)] border px-5 py-4 transition-colors duration-300 sm:px-6', item.current ? 'border-violet-line bg-violet/[0.06]' : 'border-line bg-ink-3/40 group-hover:border-line-2']}>
+            <h3 class="t-h3 flex flex-wrap items-center gap-3 !text-[clamp(1.4rem,2vw,1.75rem)]">
+              {item.role}
+              {item.current && <span class="tag tag-violet font-sans text-[0.6875rem] tracking-normal">{k.currentLabel}</span>}
             </h3>
-            <p class="mt-2 text-[0.9375rem] text-muted">
-              <span class="text-fg-2">{item.role}</span>
-              {item.desc && <> · {item.desc}</>}
-            </p>
+            <p class="mt-1.5 text-[0.9375rem] text-fg"><bdi class="font-medium">{item.company}</bdi>{item.desc && <span class="text-muted"> · {item.desc}</span>}</p>
           </div>
-          <span class="text-xs uppercase tracking-[0.16em] text-muted sm:pt-2.5 sm:text-end">{item.market}</span>
         </li>
       ))}
     </ol>

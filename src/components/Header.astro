@@ -1,5 +1,6 @@
 ---
 import type { Lang } from '../data/types';
+import { SITE } from '../data/site';
 import { getContent, href, homeAnchor } from '../i18n';
 
 interface Props { lang: Lang; path: string; onHome: boolean }
@@ -9,26 +10,27 @@ const other: Lang = lang === 'en' ? 'ar' : 'en';
 const isCases = path.startsWith('/case-studies');
 
 const links = [
-  { label: c.nav.about, href: homeAnchor(lang, 'about', onHome) },
-  { label: c.nav.cases, href: href(lang, '/case-studies'), current: isCases },
-  { label: c.nav.career, href: homeAnchor(lang, 'career', onHome) },
-  { label: c.nav.results, href: homeAnchor(lang, 'results', onHome) },
-  { label: c.nav.faq, href: homeAnchor(lang, 'faq', onHome) },
-  { label: c.nav.contact, href: homeAnchor(lang, 'contact', onHome) },
+  { label: c.nav.home, href: onHome ? '#top' : href(lang, '/'), id: 'top' },
+  { label: c.nav.about, href: homeAnchor(lang, 'about', onHome), id: 'about' },
+  { label: c.nav.leadership, href: homeAnchor(lang, 'leadership', onHome), id: 'leadership' },
+  { label: c.nav.impact, href: homeAnchor(lang, 'impact', onHome), id: 'impact' },
+  { label: c.nav.cases, href: href(lang, '/case-studies'), id: 'case-studies', current: isCases },
+  { label: c.nav.insights, href: homeAnchor(lang, 'insights', onHome), id: 'insights' },
+  { label: c.nav.contact, href: homeAnchor(lang, 'contact', onHome), id: 'contact' },
 ];
 ---
 
 <header class="site-header fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color] duration-500" data-scrolled="false">
   <div class="wrap flex h-[4.5rem] items-center justify-between gap-6">
-    <a href={href(lang, '/')} class="brand text-[1.75rem] leading-none tracking-tight" aria-label={`${c.name}, home`} dir="ltr">
-      Sofy<span class="text-violet-soft">.</span>
+    <a href={href(lang, '/')} class="brand text-[1.75rem] leading-none tracking-tight" aria-label={`Sofy., ${c.name}`} dir="ltr">
+      Sofy<span class="text-violet-2">.</span>
     </a>
 
     <nav aria-label="Primary" class="hidden lg:block">
-      <ul class="flex items-center gap-8 text-[0.875rem] text-fg-2">
+      <ul class="flex items-center gap-7 text-[0.875rem] text-fg-2">
         {links.map((l) => (
           <li>
-            <a href={l.href} class:list={['transition-colors hover:text-fg', l.current && 'text-fg']} aria-current={l.current ? 'page' : undefined}>
+            <a href={l.href} data-nav={onHome ? l.id : undefined} class:list={['nav-link hover:text-fg', l.current && 'text-fg']} aria-current={l.current ? 'page' : undefined}>
               {l.label}
             </a>
           </li>
@@ -41,8 +43,8 @@ const links = [
         href={href(other, path)}
         hreflang={other}
         lang={other}
-        class="grid h-10 min-w-10 place-items-center rounded-full border border-line-2 px-3 text-sm text-fg-2 transition-colors hover:border-white/30 hover:text-fg"
-        aria-label={c.ui.langSwitchLabel}
+        class="grid h-10 min-w-10 place-items-center rounded-[10px] border border-line-2 px-3 text-sm text-fg-2 transition-colors hover:border-white/30 hover:text-fg"
+        aria-label={`EN / ع, ${c.ui.langSwitchLabel}`}
       >
         <span dir="ltr" aria-hidden="true" class="flex items-center gap-1.5">
           <span class={lang === 'en' ? 'text-fg' : 'text-muted'}>EN</span>
@@ -50,12 +52,14 @@ const links = [
           <span class={lang === 'ar' ? 'text-fg' : 'text-muted'} style="font-family: 'IBM Plex Sans Arabic', sans-serif">ع</span>
         </span>
       </a>
-      <a href={homeAnchor(lang, 'book', onHome)} class="btn btn-primary hidden !min-h-10 !px-5 !py-2.5 text-sm sm:inline-flex">
-        {c.ctaPrimary}
+      <a href={SITE.profilePdf} download class="hidden h-10 items-center gap-2 rounded-[10px] border border-line-2 px-3 text-sm text-fg-2 transition-colors hover:border-white/30 hover:text-fg xl:inline-flex">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M2.5 13.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        {c.nav.profile}
       </a>
+      <a href={homeAnchor(lang, 'contact', onHome)} class="btn btn-primary btn-sm hidden sm:inline-flex">{c.ctaPrimary}</a>
       <button
         type="button"
-        class="menu-toggle grid h-10 w-10 place-items-center rounded-full border border-line-2 lg:hidden"
+        class="menu-toggle grid h-10 w-10 place-items-center rounded-[10px] border border-line-2 lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
         aria-label={c.ui.menu}
@@ -71,15 +75,18 @@ const links = [
   </div>
 
   <div id="mobile-nav" class="mobile-nav hidden border-t border-line bg-ink/95 backdrop-blur-xl lg:hidden">
-    <nav aria-label="Mobile" class="wrap py-6">
+    <nav aria-label="Mobile" class="wrap max-h-[calc(100dvh-4.5rem)] overflow-y-auto py-6">
       <ul class="flex flex-col">
         {links.map((l) => (
           <li class="border-b border-line">
-            <a href={l.href} class="display block py-4 text-3xl">{l.label}</a>
+            <a href={l.href} class="display block py-3.5 text-[1.75rem]">{l.label}</a>
           </li>
         ))}
       </ul>
-      <a href={homeAnchor(lang, 'book', onHome)} class="btn btn-primary mt-6 w-full">{c.ctaPrimary}</a>
+      <div class="mt-6 grid gap-3">
+        <a href={homeAnchor(lang, 'contact', onHome)} class="btn btn-primary w-full">{c.ctaPrimary}</a>
+        <a href={SITE.profilePdf} download class="btn btn-ghost w-full">{c.nav.profile} (PDF)</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -114,4 +121,24 @@ const links = [
       toggle.focus();
     }
   });
+
+  // Active section indicator on the home page
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-nav]')];
+  if (navLinks.length && 'IntersectionObserver' in window) {
+    const map = new Map(navLinks.map((a) => [a.dataset.nav, a]));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          navLinks.forEach((a) => a.classList.remove('is-active'));
+          map.get(e.target.id)?.classList.add('is-active');
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    map.forEach((_, id) => {
+      const el = id && document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
 </script>

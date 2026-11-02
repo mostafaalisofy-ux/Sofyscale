@@ -1,12 +1,15 @@
 import type { Content } from './types';
 
-const description =
-  'Building brands, scaling agencies, and driving measurable growth across Saudi Arabia and Egypt since 2010.';
+/*
+ * Sources: site-content.md, Mostafa-Sofy-Executive-Profile.pdf (2026) and the
+ * positioning brief. Anything that still needs sign-off is listed in CONFIRM.md.
+ */
 
 export const en: Content = {
   meta: {
-    title: 'Mostafa Sofy · Marketing Leader · Growth Strategist · Agency Builder',
-    description,
+    title: 'Mostafa Sofy · Marketing Leadership. Business Growth.',
+    description:
+      'Mostafa Sofy is a regional marketing and business growth leader with 15+ years across Saudi Arabia, the Gulf and Egypt. Managing Director, Steps.',
     caseIndexTitle: 'Case Studies · Real campaigns. Real numbers. · Mostafa Sofy',
     caseIndexDescription:
       '18 anonymized engagements across MENA. Live ad accounts. Live analytics. Names confidential, numbers documented.',
@@ -15,151 +18,106 @@ export const en: Content = {
   role: 'Marketing Leader · Growth Strategist · Agency Builder',
   locations: 'Riyadh · Cairo',
   nav: {
+    home: 'Home',
     about: 'About',
+    leadership: 'Leadership',
+    impact: 'Impact',
     cases: 'Case Studies',
-    career: 'Career',
-    results: 'Results',
-    faq: 'FAQ',
+    insights: 'Insights',
     contact: 'Contact',
+    profile: 'Executive Profile',
   },
-  ctaPrimary: 'Book a Strategic Session',
+  ctaPrimary: 'Discuss an Opportunity',
   ctaSecondary: 'View Case Studies',
 
   hero: {
-    eyebrow: 'Currently leading Steps · Saudi Arabia',
-    h1: 'Sofy.',
-    sub: 'Marketing Leader and Growth Strategist',
-    body: description,
-    chips: [
-      { value: '15+', label: 'Years' },
-      { value: '13x', label: 'Peak ROAS' },
-      { value: 'SAR 24M+', label: 'single-brand revenue' },
-    ],
-    badges: [
-      { value: '15+ Years', label: 'Regional leadership' },
-      { value: 'KSA · UAE · EG', label: 'Multi-market' },
-    ],
+    roles: ['Marketing Leader', 'Growth Strategist', 'Agency Builder'],
+    title: ['Marketing Leadership.', 'Business Growth.'],
+    sub: 'Building teams, scaling businesses, and turning strategy into measurable impact.',
+    ctaExplore: 'Explore My Experience',
+    ctaDiscuss: 'Discuss an Opportunity',
+    current: 'Managing Director, Steps · Riyadh',
     portraitAlt: 'Portrait of Mostafa Sofy',
   },
 
-  about: {
-    kicker: 'About',
-    headline: 'A regional operator building measurable growth.',
-    paragraphs: [
-      "I'm Sofy, a marketing and business growth leader with 15+ years of experience across digital marketing, performance marketing, business development, and agency leadership.",
-      'Throughout my career, I have led growth strategies, managed regional operations, built high-performing teams, and developed marketing systems that deliver measurable business impact across competitive markets.',
-      'My experience spans Saudi Arabia and Egypt, working with brands across retail, FMCG, hospitality, real estate, technology, e-commerce, and lifestyle sectors.',
-    ],
+  snapshot: {
+    label: 'Executive snapshot',
     stats: [
-      { value: '15+', label: 'Years Experience' },
-      { value: 'GCC + EG', label: 'Markets', note: 'Saudi Arabia · UAE · Egypt' },
-      { value: '20+', label: 'Industries Served' },
-      { value: '18', label: 'Case Studies' },
-    ],
-    portraitAlt: 'Mostafa Sofy, marketing and growth leader',
-  },
-
-  expertise: {
-    kicker: 'Expertise',
-    headline: 'The disciplines behind every result.',
-    items: [
-      { title: 'Performance Marketing', body: 'ROI-focused campaigns, full-funnel optimization, and acquisition systems built to scale.' },
-      { title: 'Growth Strategy', body: 'Strategic roadmaps that align brand, product, and revenue.' },
-      { title: 'Agency Leadership', body: 'Operating and scaling regional agencies and creative teams.' },
-      { title: 'Business Development', body: 'Opening markets, building pipelines, closing partnerships.' },
-      { title: 'Brand Positioning', body: 'Sharp narratives that win competitive markets.' },
-      { title: 'Media Buying', body: 'Cross-channel buying with measurable efficiency.' },
-      { title: 'Team Building', body: 'Recruiting and leading high-performance teams.' },
-      { title: 'Market Expansion', body: 'Cross-border launches between KSA and Egypt.' },
+      { value: '15+', label: 'Years of operating experience', note: 'Leading growth since 2010' },
+      { value: '8+', label: 'Senior leadership roles', note: 'Managing Director · Country Manager · Head of BD' },
+      { value: '18', label: 'Documented case studies', note: 'Live ad accounts, names confidential' },
+      { value: 'KSA · UAE · EG', label: 'Regional markets', note: 'Gulf-focused, Egypt-rooted' },
     ],
   },
 
-  ai: {
-    kicker: 'AI in Growth',
-    headline: 'Marketing operations, engineered with AI in the loop.',
+  about: {
+    kicker: 'About Sofy',
+    headline: 'A marketing leader with a business mindset.',
     intro:
-      'Five operating patterns I have implemented inside live performance environments. None of these are prompts. They are systems running inside ad accounts, reporting pipelines, and creative ops every day.',
-    labels: { problem: 'Problem', outcome: 'Outcome', detail: 'How it works' },
-    items: [
-      {
-        num: '01',
-        type: 'System',
-        title: 'Creative testing at agency scale.',
-        problem:
-          'Manual creative production caps testing volume at 5–10 variants per week, which starves the algorithm and stalls compounding.',
-        outcome:
-          'CPM compression and faster winner detection. The brand exits the learning phase in days, not weeks.',
-        detail:
-          'An AI-assisted creative pipeline that takes a winning angle and produces 30–50 brief-ready variants weekly across hooks, formats, and aspect ratios. Briefs auto-generate from past winners using Mixpanel drop-off signals as input.',
-      },
-      {
-        num: '02',
-        type: 'Pattern',
-        title: 'Reporting that writes insights, not rows.',
-        problem: 'Marketing teams burn 6–10 hours a week assembling reports that nobody reads.',
-        outcome:
-          'Weekly reporting collapses from hours to minutes. Leadership reads actual insights, not dashboards.',
-        detail:
-          'Reporting layer that pulls from GA4, Meta, TikTok, and Klaviyo, then runs the data through a Claude or GPT-4 layer that flags anomalies, surfaces creative fatigue, and writes the executive summary in plain language.',
-      },
-      {
-        num: '03',
-        type: 'System',
-        title: 'Performance ops copilots inside the ad account.',
-        problem: 'Senior media buyers spend 60% of their time on monitoring instead of strategy.',
-        outcome:
-          'Buyers act on signal, not noise. Spend efficiency stays inside the target band without the late-night account-checking.',
-        detail:
-          'A monitoring agent watches campaigns against ROAS, CPA, and frequency thresholds. When anything crosses a guardrail, it pushes a Slack alert with the diagnosis and a recommended action: pause, scale, refresh, or shift budget.',
-      },
-      {
-        num: '04',
-        type: 'Pattern',
-        title: 'Content briefs generated from performance data.',
-        problem:
-          'Content teams brief from intuition. Performance teams measure after the fact. The two functions never align.',
-        outcome:
-          "Content production aligned to what's working in paid, in real time. The funnel stops leaking between teams.",
-        detail:
-          'A workflow that reads winning ad creatives, scrapes top-converting hooks, then auto-generates content briefs for the content team, formatted to their actual brief template.',
-      },
-      {
-        num: '05',
-        type: 'System',
-        title: 'First-party data activation through AI matching.',
-        problem:
-          'First-party customer data sits in the CRM, disconnected from the ad platforms where it matters most.',
-        outcome:
-          'Retargeting becomes a precision instrument, not a tax. CAC drops, LTV-to-CAC widens.',
-        detail:
-          'An AI-enabled enrichment layer that segments customers by behavioural signal, then pushes hashed audiences into Meta, Google, and TikTok via Conversions API. High-LTV cohorts get scaled retargeting, low-intent ones get suppressed.',
-      },
+      "I'm Mostafa Sofy, a regional marketing and growth leader with 15+ years of operating experience across Saudi Arabia, the Gulf and Egypt.",
+    paragraphs: [
+      'My background spans performance marketing, business development and agency leadership, across industries from paints and publishing to advertising, analytics and corporate services.',
+      'Today I lead regional operations as Managing Director of Steps in Riyadh, after serving as Country Manager for Infinity Performance and Infinity Corp. The work sits where marketing meets the P&L: entering new markets, structuring operations, recruiting senior talent, and building the systems that turn marketing investment into durable growth.',
     ],
-    closing:
-      'None of these are theoretical. Each one was built inside a live engagement, against a live P&L, under a real budget.',
+    quote: 'I build the operating systems that move brands from campaigns to compounding growth.',
+    principles: [
+      { title: 'Strategy that answers to the business', body: 'Market-specific growth plans grounded in local commercial reality.' },
+      { title: 'Teams built to perform', body: 'Recruiting, structuring and leading senior, cross-functional regional teams.' },
+      { title: 'Systems that compound', body: 'Reporting, media and pipeline systems that compound month over month.' },
+    ],
+    portraitAlt: 'Mostafa Sofy at his desk in Riyadh at night',
+    more: 'More about my journey',
   },
 
-  stack: {
-    kicker: 'Operating Stack',
-    headline: 'The tools behind the work.',
-    intro:
-      'The platforms, data layers, and AI infrastructure I operate daily. Mastery of a stack is not about logos on a slide. It is about knowing which tool to use, when, and what it can and cannot do.',
-    groups: [
-      { name: 'Paid Media', desc: 'Cross-platform paid acquisition, from setup to scale', tools: ['Meta Ads', 'Google Ads', 'TikTok Ads', 'Snapchat Ads', 'X Ads', 'LinkedIn Ads'] },
-      { name: 'Analytics & Attribution', desc: 'Measurement infrastructure that ties spend to revenue', tools: ['GA4', 'Mixpanel', 'Amplitude', 'Triple Whale', 'Hyros', 'Looker Studio'] },
-      { name: 'Lifecycle & CRM', desc: 'Retention engines and customer data orchestration', tools: ['Klaviyo', 'Customer.io', 'HubSpot', 'Salesforce', 'Mailchimp', 'Sendinblue'] },
-      { name: 'Data Infrastructure', desc: 'The pipes that move data from ad accounts to insight', tools: ['BigQuery', 'Snowflake', 'Supermetrics', 'Fivetran', 'Funnel.io', 'Power BI'] },
-      { name: 'AI & Automation', desc: 'The intelligence layer running inside daily marketing ops', tools: ['OpenAI API', 'Claude API', 'n8n', 'Make', 'Zapier', 'Replit'] },
-      { name: 'Creative & Content', desc: 'Production stack for the creative throughput that performance demands', tools: ['Figma', 'Canva', 'CapCut', 'Runway', 'Adobe Creative Cloud', 'Notion'] },
+  leadership: {
+    kicker: 'Leadership & Expertise',
+    headline: 'Capabilities that drive growth.',
+    sub: 'A blend of strategic, commercial and operational experience to build, lead and scale marketing and business operations.',
+    pillars: [
+      {
+        title: 'Marketing Leadership',
+        summary: 'Setting direction, and building the function that delivers it.',
+        points: ['Marketing strategy and direction', 'Marketing team leadership', 'Strategic planning', 'Marketing operations', 'Organizational alignment'],
+      },
+      {
+        title: 'Business Growth',
+        summary: 'Turning market opportunity into durable revenue lines.',
+        points: ['Business development', 'Growth strategy', 'Commercial thinking', 'Market expansion', 'Opportunity development'],
+      },
+      {
+        title: 'Agency Management',
+        summary: 'Operating agencies end to end, from commercial pipeline to delivery and retention.',
+        points: ['Agency operations', 'Client relationship management', 'Team development', 'Resource planning', 'Operational processes', 'Business performance'],
+      },
+      {
+        title: 'Performance & Digital',
+        summary: 'Measurable, ROI-led acquisition systems across paid media and digital channels.',
+        points: ['Performance marketing', 'Paid media strategy', 'Digital marketing ecosystems', 'Measurement and optimization', 'Data-informed decision-making'],
+      },
+      {
+        title: 'Brand & Market Strategy',
+        summary: 'Sharpening the narrative, and taking it to market.',
+        points: ['Brand positioning', 'Go-to-market strategy', 'Market localization', 'Integrated marketing', 'Regional market understanding'],
+      },
     ],
-    footer: ['Primary', 'MENA', 'Bilingual Operations', 'Arabic + English'],
+    stackTitle: 'The operating stack',
+    stack: [
+      { name: 'Paid Media', tools: ['Meta Ads', 'Google Ads', 'TikTok Ads', 'Snapchat Ads', 'X Ads', 'LinkedIn Ads'] },
+      { name: 'Analytics & Attribution', tools: ['GA4', 'Mixpanel', 'Amplitude', 'Triple Whale', 'Hyros', 'Looker Studio'] },
+      { name: 'Lifecycle & CRM', tools: ['Klaviyo', 'Customer.io', 'HubSpot', 'Salesforce', 'Mailchimp', 'Sendinblue'] },
+      { name: 'Data Infrastructure', tools: ['BigQuery', 'Snowflake', 'Supermetrics', 'Fivetran', 'Funnel.io', 'Power BI'] },
+      { name: 'AI & Automation', tools: ['OpenAI API', 'Claude API', 'n8n', 'Make', 'Zapier', 'Replit'] },
+      { name: 'Creative & Content', tools: ['Figma', 'Canva', 'CapCut', 'Runway', 'Adobe Creative Cloud', 'Notion'] },
+    ],
   },
 
   career: {
-    kicker: 'Career',
-    headline: 'A career built across regions, brands, and disciplines.',
+    kicker: 'Career Journey',
+    headline: 'A progressive leadership path.',
+    sub: 'A fifteen-year arc through publishing, paints, advertising, analytics and performance, building toward regional managing director.',
     currentLabel: 'Current',
     presentLabel: 'Present',
+    profileCta: 'Download the Executive Profile',
     items: [
       { company: 'Steps', market: 'Riyadh · KSA', role: 'Managing Director', desc: 'Regional operations & growth leadership.', from: 2025, current: true },
       { company: 'Infinity Performance', market: 'KSA', role: 'Country Manager', desc: 'Performance marketing leadership.', from: 2023, to: 2026 },
@@ -173,103 +131,179 @@ export const en: Content = {
     ],
   },
 
-  clients: {
-    kicker: 'Selected Clients',
-    headline: 'Selected Clients',
-    names: ['Buffalo Burger', 'Juhayna', 'Edita Foods', 'Costa Coffee', 'Toyota', 'BYD', 'DAMAC', 'STC', 'QNB', 'Air Arabia', 'Radisson Blu', 'Saudi GEA'],
-    note: 'Full roster spans 200+ brands',
-  },
-
-  regional: {
-    kicker: 'Regional',
-    headline: 'Building growth across Saudi Arabia & Egypt.',
-    tagline: 'Egypt & the Gulf · One operator',
+  impact: {
+    kicker: 'Selected Impact',
+    headline: 'Turning strategy into business impact.',
+    sub: 'Selected operating themes drawn from regional leadership across agencies, performance teams and business development organisations.',
+    contributionLabel: 'Contribution',
+    roleLabel: 'My role',
     items: [
-      { title: 'Saudi market experience', body: "Deep operational experience inside Saudi Arabia's competitive marketing landscape." },
-      { title: 'Regional operations', body: 'Leading cross-border teams between KSA and Egypt.' },
-      { title: 'Performance-driven growth', body: 'Measurable ROI across performance, brand, and acquisition channels.' },
-      { title: 'Multi-market leadership', body: 'Adapting strategy to distinct consumer behaviors and media ecosystems.' },
-      { title: 'Team management', body: 'Building high-output marketing and agency teams.' },
+      {
+        title: 'Business Development',
+        contribution: 'Architected strategic partnerships that unlocked new verticals and recurring revenue.',
+        role: 'Senior business development mandates across agencies and corporate services.',
+      },
+      {
+        title: 'Operational Growth',
+        contribution: 'Installed reporting, forecasting and pipeline discipline across regional units.',
+        role: 'Country-level P&L and operational leadership.',
+      },
+      {
+        title: 'Marketing Transformation',
+        contribution: 'Delivered measurable, performance-focused marketing systems with ROI accountability.',
+        role: 'Led regional marketing and performance operations.',
+      },
+      {
+        title: 'Team Leadership',
+        contribution: 'Built and managed high-performing, cross-functional teams across sales, media and delivery.',
+        role: 'Recruited, structured and led senior regional teams.',
+      },
+      {
+        title: 'Market Expansion',
+        contribution: 'Developed scalable growth strategies adapted to Saudi and Egyptian market dynamics.',
+        role: 'Regional expansion and market entry as country manager and managing director.',
+      },
+      {
+        title: 'Performance Improvement',
+        contribution: 'Performance and media buying at scale, with campaign outcomes documented in 18 case studies.',
+        role: 'Strategy and senior oversight. Execution by the teams and agencies involved.',
+      },
     ],
-  },
-
-  results: {
-    kicker: 'Results',
-    headline: 'Numbers behind the work.',
-    stats: [
-      { value: '15+', label: 'Years Experience', note: 'Leading growth since 2010.' },
-      { value: 'GCC + EG', label: 'Regional Markets', note: 'Saudi Arabia · UAE · Egypt, across the wider Gulf.' },
-      { value: '20+', label: 'Industries Served', note: 'F&B · Retail · Real Estate · Automotive · Healthcare · Finance · Telecom · Hospitality & more.' },
-      { value: '13x', label: 'Peak ROAS', note: 'Highest recorded campaign return.' },
-      { value: 'SAR 24M+', label: 'Peak Campaign Revenue', note: 'Single-brand revenue in 11 months' },
-    ],
-    pillars: [
-      { kicker: 'Scope', title: 'Regional Leadership', body: 'Cross-market operations across KSA & Egypt.' },
-      { kicker: 'Teams', title: 'Built & Led High-Output Teams', body: 'High-output marketing & agency teams.' },
-      { kicker: 'Approach', title: 'Growth Systems, Performance Discipline', body: 'Performance-driven, never ad-hoc.' },
-    ],
-    industries: ['Retail', 'Fashion', 'FMCG', 'Hospitality', 'Real Estate', 'E-commerce', 'Technology', 'Lifestyle'],
+    note: 'Campaign figures in the case studies come from live ad accounts and reflect the work of the teams and agencies involved.',
+    clientsTitle: 'Selected brands across the portfolio',
+    clients: ['Buffalo Burger', 'Juhayna', 'Edita Foods', 'Costa Coffee', 'Toyota', 'BYD', 'DAMAC', 'STC', 'QNB', 'Air Arabia', 'Radisson Blu', 'Saudi GEA'],
+    clientsNote: 'Full roster spans 200+ brands',
   },
 
   casesTeaser: {
-    kicker: 'Case Studies',
+    kicker: 'Selected Case Studies',
     headline: 'Real campaigns. Real numbers.',
     sub: '18 anonymized engagements across MENA. Live ad accounts. Live analytics. Names confidential, numbers documented.',
-    viewAll: 'View all 18 case studies',
+    viewAll: 'Explore all 18 case studies',
+    view: 'View case study',
   },
 
-  sessions: {
-    kicker: 'Strategic Sessions',
-    headline: "Let's Build Your Next Growth Move",
-    intro:
-      "Whether you're scaling an agency, growing a brand, restructuring your marketing direction, or expanding into competitive markets, strategic clarity changes everything.",
-    topicsLabel: 'Session topics',
-    topics: [
-      { title: 'Agency Growth Strategy', body: 'Scale operations, retention, and revenue.' },
-      { title: 'Performance Marketing', body: 'Data-driven acquisition that compounds.' },
-      { title: 'Saudi Market Expansion', body: 'Enter and win in the Gulf region.' },
-      { title: 'Team Structure & Scaling', body: 'Build org charts that perform.' },
-      { title: 'Marketing Leadership', body: 'Executive direction and fractional CMO.' },
-      { title: 'Brand Positioning', body: 'Sharpen the narrative that converts.' },
-      { title: 'Business Growth Systems', body: 'Operating systems for predictable growth.' },
-      { title: 'Client Acquisition Strategy', body: 'Pipelines built for premium clients.' },
+  philosophy: {
+    kicker: 'Leadership Philosophy',
+    lines: ['Strategy creates direction.', 'People create momentum.', 'Execution creates impact.'],
+    statement:
+      "Marketing is not about random campaigns. It's about building the right strategy, executing with precision, and creating systems that move brands forward.",
+    pillars: [
+      { title: 'Strategic clarity', body: 'Turn complexity into a clear and actionable direction.' },
+      { title: 'People & culture', body: 'Build and empower teams that deliver and grow.' },
+      { title: 'Disciplined execution', body: 'Convert strategy into measurable business results.' },
     ],
-    scarcityTag: 'By application · Limited availability',
-    scarcity:
-      'Due to ongoing regional projects and leadership commitments, only a limited number of strategic sessions are available each month.',
   },
 
-  form: {
-    title: 'Apply for a strategic session',
-    stepOf: (n, total) => `Step ${n} of ${total}`,
-    steps: ['About your business', 'Main challenge / goal', 'Your details'],
-    businessQ: 'What best describes your business?',
-    businessOptions: ['Agency / Studio', 'Brand / E-commerce', 'Startup / Founder', 'Enterprise / Corporate', 'Other'],
-    marketQ: 'What market are you operating in?',
-    marketOptions: ['Saudi Arabia', 'Egypt', 'GCC region', 'MENA', 'Global', 'Other'],
-    challengeQ: 'What is your main challenge or goal?',
-    budgetQ: 'Budget range',
-    name: 'Name',
+  insights: {
+    kicker: 'Insights & Perspectives',
+    headline: 'Ideas on marketing, growth and leadership.',
+    sub: 'The themes I think and write about, and one operating perspective in full.',
+    topicsLabel: 'Editorial themes',
+    topics: ['Marketing Leadership', 'Business Growth', 'Agency Management', 'Saudi Market & Regional Business', 'Performance Marketing', 'AI & Marketing Transformation'],
+    featureLabel: 'Perspective · AI & Marketing Transformation',
+    featureTitle: 'Marketing operations, engineered with AI in the loop.',
+    featureIntro:
+      'Five operating patterns I have implemented inside live performance environments. None of these are prompts. They are systems running inside ad accounts, reporting pipelines, and creative ops every day.',
+    labels: { problem: 'Problem', outcome: 'Outcome', detail: 'How it works' },
+    items: [
+      {
+        num: '01',
+        type: 'System',
+        title: 'Creative testing at agency scale.',
+        problem: 'Manual creative production caps testing volume at 5–10 variants per week, which starves the algorithm and stalls compounding.',
+        outcome: 'CPM compression and faster winner detection. The brand exits the learning phase in days, not weeks.',
+        detail: 'An AI-assisted creative pipeline that takes a winning angle and produces 30–50 brief-ready variants weekly across hooks, formats, and aspect ratios. Briefs auto-generate from past winners using Mixpanel drop-off signals as input.',
+      },
+      {
+        num: '02',
+        type: 'Pattern',
+        title: 'Reporting that writes insights, not rows.',
+        problem: 'Marketing teams burn 6–10 hours a week assembling reports that nobody reads.',
+        outcome: 'Weekly reporting collapses from hours to minutes. Leadership reads actual insights, not dashboards.',
+        detail: 'Reporting layer that pulls from GA4, Meta, TikTok, and Klaviyo, then runs the data through a Claude or GPT-4 layer that flags anomalies, surfaces creative fatigue, and writes the executive summary in plain language.',
+      },
+      {
+        num: '03',
+        type: 'System',
+        title: 'Performance ops copilots inside the ad account.',
+        problem: 'Senior media buyers spend 60% of their time on monitoring instead of strategy.',
+        outcome: 'Buyers act on signal, not noise. Spend efficiency stays inside the target band without the late-night account-checking.',
+        detail: 'A monitoring agent watches campaigns against ROAS, CPA, and frequency thresholds. When anything crosses a guardrail, it pushes a Slack alert with the diagnosis and a recommended action: pause, scale, refresh, or shift budget.',
+      },
+      {
+        num: '04',
+        type: 'Pattern',
+        title: 'Content briefs generated from performance data.',
+        problem: 'Content teams brief from intuition. Performance teams measure after the fact. The two functions never align.',
+        outcome: "Content production aligned to what's working in paid, in real time. The funnel stops leaking between teams.",
+        detail: 'A workflow that reads winning ad creatives, scrapes top-converting hooks, then auto-generates content briefs for the content team, formatted to their actual brief template.',
+      },
+      {
+        num: '05',
+        type: 'System',
+        title: 'First-party data activation through AI matching.',
+        problem: 'First-party customer data sits in the CRM, disconnected from the ad platforms where it matters most.',
+        outcome: 'Retargeting becomes a precision instrument, not a tax. CAC drops, LTV-to-CAC widens.',
+        detail: 'An AI-enabled enrichment layer that segments customers by behavioural signal, then pushes hashed audiences into Meta, Google, and TikTok via Conversions API. High-LTV cohorts get scaled retargeting, low-intent ones get suppressed.',
+      },
+    ],
+    closing: 'None of these are theoretical. Each one was built inside a live engagement, against a live P&L, under a real budget.',
+    follow: 'Follow the conversation on LinkedIn',
+  },
+
+  contact: {
+    kicker: "Let's Connect",
+    headline: 'Explore the right opportunity.',
+    sub: "Whether it's a leadership role or a strategic business collaboration, I'm open to meaningful conversations across the Gulf and Egypt.",
+    paths: {
+      executive: {
+        title: 'Executive Opportunities',
+        audience: 'For organizations and recruiters',
+        body: 'Exploring senior marketing leadership or a business leadership appointment.',
+        cta: 'Discuss an Executive Opportunity',
+      },
+      partnership: {
+        title: 'Strategic Partnerships',
+        audience: 'For founders and business owners',
+        body: 'Looking to build, scale or transform marketing and growth.',
+        cta: 'Discuss a Strategic Partnership',
+      },
+    },
+    form: {
+      name: 'Name',
+      company: 'Company',
+      email: 'Professional email',
+      position: 'Position or opportunity',
+      collaboration: 'Type of collaboration',
+      collaborationPlaceholder: 'Select one',
+      collaborationOptions: [
+        'Agency Growth Strategy',
+        'Performance Marketing',
+        'Saudi Market Expansion',
+        'Team Structure & Scaling',
+        'Marketing Leadership (fractional)',
+        'Brand Positioning',
+        'Business Growth Systems',
+        'Client Acquisition Strategy',
+        'Other',
+      ],
+      message: 'Message',
+      optional: 'optional',
+      required: 'Please complete the highlighted fields.',
+      sending: 'Sending',
+      successTitle: 'Message received.',
+      successBody: 'Thank you. I read every message personally and will reply by email.',
+      error: 'Something went wrong and your message was not sent. Please try again, or reach out on WhatsApp.',
+    },
+    direct: 'Or reach out directly',
     email: 'Email',
     whatsapp: 'WhatsApp',
-    company: 'Company',
-    message: 'Short message',
-    optional: 'optional',
-    next: 'Continue',
-    back: 'Back',
-    submit: 'Submit application',
-    sending: 'Sending',
-    successTitle: 'Application received.',
-    successBody: 'Thank you. I review every application personally and will reply by email or WhatsApp.',
-    error: 'Something went wrong. Please try again, or reach out directly on WhatsApp.',
-    required: 'Please complete this step to continue.',
-  },
-
-  faq: {
-    kicker: 'FAQ',
-    headline: 'Questions before we talk.',
-    sub: 'The questions founders, CEOs, and marketing leaders ask before booking a strategic session.',
-    items: [
+    linkedin: 'LinkedIn',
+    profile: 'Executive Profile',
+    profileCta: 'Download PDF',
+    faqTitle: 'Questions before we talk',
+    faq: [
       { q: 'Who is this for?', a: 'Founders, CEOs, agency owners, and marketing leaders operating in Saudi Arabia, Egypt, or the wider GCC who need senior strategic clarity, not another freelancer or generalist consultant.' },
       { q: 'What happens in a strategic session?', a: 'A focused conversation about your current growth situation, the specific bottlenecks, and a clear next-step plan. No generic decks. No filler. You leave with direction you can act on inside the same week.' },
       { q: 'Do you work with brands, or only agencies?', a: 'Both. Brand-side leadership and agency-side scaling are two sides of the same operating discipline. Each session is shaped around your specific position in the market.' },
@@ -279,17 +313,6 @@ export const en: Content = {
       { q: 'How fast can we start?', a: 'Strategic sessions are scheduled within 7 to 14 days, depending on availability. A limited number of slots are released each month.' },
       { q: 'Is everything confidential?', a: 'Yes. All conversations, materials, and information shared are treated as fully confidential. NDAs available on request.' },
     ],
-  },
-
-  contact: {
-    kicker: 'Contact',
-    headline: "Let's build what's next.",
-    sub: 'Open to executive leadership, strategic advisory, and growth partnerships across Saudi Arabia and Egypt.',
-    email: 'Email',
-    whatsapp: 'WhatsApp',
-    linkedin: 'LinkedIn',
-    profile: 'Executive Profile',
-    profileCta: 'Download PDF',
   },
 
   casesPage: {
@@ -307,28 +330,28 @@ export const en: Content = {
     empty: 'No case studies match this combination. Try widening a filter.',
     disclaimer:
       'All figures are sourced from live ad accounts and analytics platforms. Client identities and brand names are kept confidential. NDAs available on request.',
-    read: 'Read case study',
+    read: 'View case study',
   },
 
   caseDetail: {
     back: 'All case studies',
     market: 'Market',
     category: 'Category',
-    metrics: 'Key metrics',
-    summary: 'Summary',
+    discipline: 'Discipline',
+    context: 'Business context',
+    overview: 'Overview',
+    impact: 'Business impact',
     prev: 'Previous',
     next: 'Next',
     more: 'More case studies',
-    ctaTitle: "Let's Build Your Next Growth Move",
-    ctaBody:
-      "Whether you're scaling an agency, growing a brand, restructuring your marketing direction, or expanding into competitive markets, strategic clarity changes everything.",
+    ctaTitle: 'Explore the right opportunity.',
+    ctaBody: "Whether it's a leadership role or a strategic business collaboration, I'm open to meaningful conversations across the Gulf and Egypt.",
   },
 
   ui: {
     skip: 'Skip to content',
     menu: 'Menu',
     close: 'Close',
-    langSwitch: 'ع',
     langSwitchLabel: 'اقرأ بالعربية',
     whatsappLabel: 'Chat on WhatsApp',
     backToTop: 'Back to top',
@@ -336,7 +359,7 @@ export const en: Content = {
     notFoundTitle: 'Page not found.',
     notFoundBody: 'The page you are looking for has moved or no longer exists.',
     home: 'Back to home',
-    thanksTitle: 'Application received.',
-    thanksBody: 'Thank you. I review every application personally and will reply by email or WhatsApp.',
+    thanksTitle: 'Message received.',
+    thanksBody: 'Thank you. I read every message personally and will reply by email.',
   },
 };

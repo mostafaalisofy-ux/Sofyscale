@@ -1,89 +1,83 @@
-# Items to confirm before launch
+# Content confirmation list
 
-Everything below is **live on the site as written** (except where noted), because `site-content.md` marks it `[CONFIRM]`. The marker itself is never rendered, and a post-build check (`scripts/check-copy.mjs`) fails the build if "TO CONFIRM" or "[CONFIRM]" ever reaches the HTML.
+Everything below is **live on the site as written** unless marked otherwise. The site never shows confirmation markers; a post-build check (`scripts/check-copy.mjs`) fails the build if "TO CONFIRM" or "[CONFIRM]" ever reaches the HTML.
 
-To change any value, edit `src/data/content.en.ts`, `src/data/content.ar.ts` or `src/data/cases.ts`, then rebuild.
+Edit copy in `src/data/content.en.ts`, `src/data/content.ar.ts` and `src/data/cases.ts`, then rebuild.
+
+**Sources used:** `site-content.md`, `Mostafa-Sofy-Executive-Profile.pdf` (2026), the repositioning brief, and your later instructions in this project (no market count; lead with Saudi Arabia, the UAE and Egypt).
 
 ---
 
-## 1. Figures marked [CONFIRM] in site-content.md
+## 1. New executive copy that needs your approval
 
-| # | Where it appears | Content as published | File |
-|---|---|---|---|
-| 1 | Hero stat chips | **SAR 24M+** single-brand revenue | `content.*.ts` → `hero.chips` |
-| 2 | About stats | ~~4 Markets~~ → no number, see section 2 | `content.*.ts` → `about.stats` |
-| 3 | AI in Growth, 01 (Problem) | Manual production caps testing at **5–10 variants per week** | `content.*.ts` → `ai.items[0]` |
-| 4 | AI in Growth, 01 (How it works) | **30–50** brief-ready variants weekly; briefs generated from **Mixpanel** drop-off signals | `content.*.ts` → `ai.items[0]` |
-| 5 | AI in Growth, 02 (Problem) | Teams burn **6–10 hours a week** on reports | `content.*.ts` → `ai.items[1]` |
-| 6 | AI in Growth, 03 (Problem) | Senior buyers spend **60%** of their time monitoring | `content.*.ts` → `ai.items[2]` |
-| 7 | AI in Growth, closing line | "None of these are theoretical. Each one was built inside a live engagement, against a live P&L, under a real budget." | `content.*.ts` → `ai.closing` |
-| 8 | Results | ~~4 Regional Markets~~ → no number, see section 2 | `content.*.ts` → `results.stats` |
-| 9 | Results | **SAR 24M+** Peak Campaign Revenue, single-brand revenue in **11 months** | `content.*.ts` → `results.stats` |
-| 10 | Strategic Sessions | Scarcity note: "Due to ongoing regional projects and leadership commitments, only a limited number of strategic sessions are available each month." | `content.*.ts` → `sessions.scarcity` |
-
-## 2. Career ✅ resolved from the Executive Profile (2026)
-
-Dates, titles and markets now come from `Sofy-Executive-Profile.pdf`, which you approved as a source. Changes from the original site-content.md:
-
-- Every role now shows its period and title. Steps is shown as "2025 – Present" (Arabic: "منذ 2025").
-- **Added** Infinity Corp: Country Manager & Head of Business Development, KSA, 2023–2025. It has no description because the profile gives none.
-- **BirdMilk Advertising Agency** market changed from "KSA / EG" to **Egypt**.
-- **Al-Jazeera Paints** market changed from "KSA" to **KSA · Egypt**.
-- **Steps** market is now "Riyadh · KSA".
-- The company name stays "Steps" (the profile says "Steps Saudi") to match the hero line "Currently leading Steps".
-
-Arabic titles: العضو المنتدب، المدير القُطري، المدير القُطري ورئيس تطوير الأعمال، رئيس تطوير الأعمال، مدير تطوير الأعمال، مدير المبيعات، مسؤول أول تطوير أعمال المشاريع، مطوّر أعمال أول.
-
-### ✅ Markets: no number
-
-As you asked, market counts no longer show a number. They now lead with the Gulf (Saudi Arabia and the UAE) plus Egypt:
-
-| Where | Now shows |
-|---|---|
-| Hero badge | KSA · UAE · EG, Multi-market |
-| About stats | GCC + EG, Markets: Saudi Arabia · UAE · Egypt |
-| Regional tagline | Egypt & the Gulf · One operator |
-| Results stats | GCC + EG, Regional Markets: Saudi Arabia · UAE · Egypt, across the wider Gulf |
-| Case Studies header | GCC + EG, Markets: KSA · UAE · Egypt & beyond (the case sample also includes Libya) |
-
-The Libya filter and case study 07 (Libya) are unchanged.
-
-## 3. Selected Clients
-
-The whole block is marked [CONFIRM]:
-
-Buffalo Burger, Juhayna, Edita Foods, Costa Coffee, Toyota, BYD, DAMAC, STC, QNB, Air Arabia, Radisson Blu, Saudi GEA, plus the note "Full roster spans 200+ brands".
-
-Worth checking: the Case Studies page says "Client identities and brand names are kept confidential." Please make sure you have permission to name these brands publicly, and that none of them can be matched to a specific anonymized case study.
-
-## 4. Case study headlines
-
-| Case | Headline as published | Note |
+| Where | Copy | Basis |
 |---|---|---|
-| 01 Consumer Electronics Retailer | **SAR 8M in 6 months** | ⚠️ **Inconsistent:** the metrics show **SAR 2.96M** revenue. Either the headline or the metric needs correcting. |
-| 02 Perfume Brand | SAR 24M+ in 11 months | Same figure as the hero and Results stats. |
-| 04 Gen-Z Fashion Brand | SAR 3.2M · 5,000+ orders | |
-| 05 Fashion Brand | 6.49x average ROAS across the operation | |
-| 07 Cosmetics Brand (Libya) | EGP 5M+ via messaging-led conversion | Market is Libya but the figure is in EGP. Please confirm the currency. |
-| 10 Education Academy (GCC) | 5.29M impressions · 1.13M reach | Spend is shown as EGP 290K for a GCC campaign. Please confirm the currency. |
-| 14 Quick-Service Restaurant Chain | 250 influencers, one drive-thru moment, two hours | |
-| 16 Toys & Kids Retailer | 750 influencers, 4 days, one message: "we're in KSA" | |
+| Hero | "Marketing Leadership. Business Growth." / "Building teams, scaling businesses, and turning strategy into measurable impact." | Your brief, verbatim |
+| Hero | "Managing Director, Steps · Riyadh" | Executive Profile: Steps Saudi, 2025 to present |
+| Snapshot | **8+** Senior leadership roles | Executive Profile ("08+ senior leadership roles") |
+| Snapshot | **KSA · UAE · EG**, "Gulf-focused, Egypt-rooted" | Your instruction. ⚠️ No UAE role appears in the career history; please confirm the UAE claim is accurate. |
+| About intro | "…15+ years of operating experience across Saudi Arabia, the Gulf and Egypt" | Profile says "across Saudi Arabia and Egypt"; "the Gulf" follows your instruction |
+| About | Paragraphs on background, Steps, Infinity Performance and Infinity Corp, and the quote "I build the operating systems that move brands from campaigns to compounding growth." | Executive Profile pages 2, 4 and 6 |
+| About principles | Strategy that answers to the business / Teams built to perform / Systems that compound | Adapted from the profile's four operating pillars |
+| Leadership & Expertise | Five pillars and their bullet points | Your brief. ⚠️ Confirm each bullet reflects real experience (for example "Resource planning", "Organizational alignment"). |
+| Selected Impact | Six contribution statements | Executive Profile page 5 ("Leadership & Impact"), close to verbatim |
+| Selected Impact | The six "My role" lines | My framing, written to separate your contribution from team or agency delivery. ⚠️ Please check each one. |
+| Selected Impact note | "Campaign figures in the case studies come from live ad accounts and reflect the work of the teams and agencies involved." | Attribution safeguard from your brief |
+| Leadership Philosophy | "Strategy creates direction. People create momentum. Execution creates impact." | Your brief |
+| Leadership Philosophy | "Marketing is not about random campaigns. It's about building the right strategy…" | Executive Profile page 7, verbatim |
+| Leadership Philosophy | Strategic clarity / People & culture / Disciplined execution, with one-line descriptions | Your reference mockup |
+| Contact | "Explore the right opportunity." and the two path descriptions | Your brief and mockup |
 
-## 5. Hidden until confirmed
+## 2. Figures from site-content.md still marked [CONFIRM]
 
-- **"How the session works"** (Duration, Cost, Format, What you get). The source says to hide this block until confirmed, so it is **not rendered**. Send the four values and it can be added above the intake form.
+| Where | Content as published |
+|---|---|
+| Insights, AI perspective 01 | 5–10 variants per week; 30–50 brief-ready variants weekly; Mixpanel drop-off signals |
+| Insights, AI perspective 02 | 6–10 hours a week on reports |
+| Insights, AI perspective 03 | 60% of senior buyers' time on monitoring |
+| Insights, closing line | "None of these are theoretical. Each one was built inside a live engagement…" |
+| Case 01 | ⚠️ **Inconsistent:** headline says **SAR 8M in 6 months**, metric says **SAR 2.96M** revenue |
+| Case 02 | SAR 24M+ in 11 months |
+| Case 04 | SAR 3.2M · 5,000+ orders |
+| Case 05 | 6.49x average ROAS across the operation |
+| Case 07 | EGP 5M+ via messaging-led conversion. ⚠️ Libya market, EGP currency |
+| Case 10 | 5.29M impressions · 1.13M reach. ⚠️ GCC market, EGP spend |
+| Case 14 | 250 influencers, one drive-thru moment, two hours |
+| Case 16 | 750 influencers, 4 days, "we're in KSA" |
+| Selected brands (Impact section) | Buffalo Burger, Juhayna, Edita Foods, Costa Coffee, Toyota, BYD, DAMAC, STC, QNB, Air Arabia, Radisson Blu, Saudi GEA; "200+ brands". ⚠️ Confirm you may name them publicly, given the case studies are anonymized. |
 
----
+## 3. Missing case-study detail (not shown on the site)
 
-## 6. Decisions I made that you should review
+Your brief asks each case study to cover Business Context, Challenge, My Role, Strategic Approach, Execution and Business Impact. For all 18 cases only the context (market, category), an overview and the impact metrics exist. Pages show those and nothing else.
 
-These were not specified in `site-content.md`:
+To add the missing parts, fill in the optional `challenge`, `role`, `approach` and `execution` fields (EN and AR) for any case in `src/data/cases.ts`. They appear on that case's page automatically.
 
-1. **Budget range (intake form, step 2)** is a free-text field, because the source gives no ranges. If you want fixed options (for example SAR bands), send them and it will become a choice list.
-2. **Form microcopy** that isn't in the source: button labels ("Continue", "Back", "Submit application"), "Step 1 of 3", the form title "Apply for a strategic session", validation and error text, and the success message ("Thank you. I review every application personally and will reply by email or WhatsApp."). Same for the Arabic equivalents.
-3. **"How it works"** is the label used for the "Detail" field in the AI in Growth cards.
-4. **Featured case studies on the home page:** 02, 07, 12, 03, 11, 13 (`FEATURED` in `src/data/cases.ts`).
-5. **Case study filter tagging.** Multi-tagged where the category lists several, for example 13 Food Delivery is tagged KSA and GCC. 14 QSR is tagged Influencer Marketing (discipline) and F&B (industry). 15, 16 and 17 are tagged Retail.
-6. **Arabic translation.** Professional Gulf-friendly MSA throughout. Brand and company names stay in Latin script, except Al-Jazeera Paints → دهانات الجزيرة. Figures stay as Latin numerals ("13x", "SAR 24M+") for consistency with ad-platform reporting. A native-speaker read is recommended.
-7. **Site URL.** On Netlify the site uses Netlify's own `URL` variable automatically. Set `SITE_URL` once you have a custom domain (see README).
-8. **Executive Profile PDF.** Its cover still lists the old website, `sofy.lovable.app`. Update the link in the PDF once the new domain is live.
+## 4. Removed or relocated in the repositioning
+
+| Item | What happened |
+|---|---|
+| "20+ Industries Served" | **Removed.** Unverified; the profile only says "multi-industry". Can be restored if confirmed. |
+| 13x Peak ROAS and SAR 24M+ stats on the home page | Removed from the home page (campaign results, attribution unclear). Still shown in the case studies and on the Case Studies page. |
+| Old Expertise (8 disciplines) | Merged into the five Leadership & Expertise pillars |
+| AI in Growth section | Moved into Insights as the featured perspective, content unchanged |
+| Operating Stack section | Moved into Leadership & Expertise, content unchanged |
+| Regional section | Folded into About, Impact (Market Expansion) and the snapshot |
+| Results section and industries marquee | Removed (covered by the snapshot and case studies) |
+| Strategic Sessions intro, topics and 3-step form | Replaced by the two contact paths. The eight session topics are now the "Type of collaboration" options in the Strategic Partnership form. |
+| Scarcity note ("By application · Limited availability…") | Removed: it read as freelancer positioning |
+| FAQ | Kept, now inside the Contact section. ⚠️ Several answers still mention "strategic sessions"; tell me if you want them reworded. |
+
+## 5. Images
+
+- **Used:** studio headshot (hero), Riyadh night portrait (About), fashion, F&B and education covers (cases 15, 09 and 10). The baked-in text on the covers was blurred out, because it described work that isn't in the case studies (for example "Lead Generation / Dealer Performance").
+- **Not used:**
+  - The automotive cover: there is no automotive case study.
+  - The 14-asset contact sheet (cityscapes, textures): the tiles are too low-resolution. Send the originals and they can be added.
+  - The hand-on-chin portraits: the facial features look altered compared with your other photos. Your brief rules out AI-altered likenesses, so please confirm these are unedited before they are used.
+- Cases without photography use a designed typographic cover.
+
+## 6. Other
+
+- **Insights** shows only real content: six editorial themes, the AI perspective in full, and a link to LinkedIn. No articles, dates or links were invented. Send articles when you have them.
+- **Executive Profile PDF:** its cover still lists `sofy.lovable.app`. Update it once the new domain is live.
+- **Arabic copy:** rewritten for the new structure in professional Gulf-friendly Arabic; a native read is recommended.

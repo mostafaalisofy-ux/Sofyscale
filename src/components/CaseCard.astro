@@ -2,44 +2,40 @@
 import type { Lang } from '../data/types';
 import { type CaseStudy, t } from '../data/cases';
 import { getContent, href } from '../i18n';
+import CaseCover from './CaseCover.astro';
 
-interface Props { item: CaseStudy; lang: Lang; headingLevel?: 'h2' | 'h3' }
-const { item, lang, headingLevel: H = 'h3' } = Astro.props;
+interface Props { item: CaseStudy; lang: Lang; headingLevel?: 'h2' | 'h3'; size?: 'lg' | 'md' }
+const { item, lang, headingLevel: H = 'h3', size = 'md' } = Astro.props;
 const c = getContent(lang);
-const lead = item.metrics[0];
 ---
 
 <article
-  class="case-card group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-line bg-ink-2 p-7 transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-violet-2/50 sm:p-8"
+  class="case-card group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-ink-2 transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-violet-line"
   data-market={item.markets.join(' ')}
   data-discipline={item.disciplines.join(' ')}
   data-industry={item.industries.join(' ')}
 >
-  <div class="pointer-events-none absolute -end-24 -top-24 h-56 w-56 rounded-full bg-violet/0 blur-3xl transition-colors duration-700 group-hover:bg-violet/25" aria-hidden="true"></div>
-  <div class="flex items-start justify-between gap-4 text-xs text-muted">
-    <span class="tnum"><bdi dir="ltr">{item.num}</bdi></span>
-    <span class="text-end">{t(item.market, lang)}</span>
-  </div>
+  <CaseCover item={item} lang={lang} class={size === 'lg' ? 'aspect-[4/3]' : 'aspect-[16/10]'} />
 
-  <p class="display mt-10 text-[clamp(3rem,6vw,4.25rem)] leading-none tnum"><bdi dir="ltr">{t(lead.value, lang)}</bdi></p>
-  {lead.label && <p class="mt-2 text-sm text-violet-soft">{t(lead.label, lang)}</p>}
+  <div class="flex flex-1 flex-col p-6 sm:p-7">
+    <p class="meta">{t(item.market, lang)}</p>
+    <H class="mt-3 text-xl font-medium leading-snug text-fg">
+      <a href={href(lang, `/case-studies/${item.slug}`)} class="after:absolute after:inset-0 after:content-['']">
+        {t(item.title, lang)}
+      </a>
+    </H>
+    <p class="mt-2 text-[0.9375rem] leading-relaxed text-fg-2">{t(item.headline, lang)}</p>
 
-  <H class="mt-8 text-xl font-medium leading-snug">
-    <a href={href(lang, `/case-studies/${item.slug}`)} class="after:absolute after:inset-0 after:content-['']">
-      {t(item.title, lang)}
-    </a>
-  </H>
-  <p class="mt-2 text-[0.9375rem] leading-relaxed text-fg-2">{t(item.headline, lang)}</p>
-
-  <div class="mt-auto pt-8">
-    <ul class="flex flex-wrap gap-x-5 gap-y-2 border-t border-line pt-5 text-xs text-muted">
-      {item.metrics.slice(1).map((m) => (
-        <li><bdi dir="ltr" class="text-fg-2">{t(m.value, lang)}</bdi>{m.label && <> {t(m.label, lang)}</>}</li>
-      ))}
-    </ul>
-    <p class="mt-5 flex items-center gap-2 text-sm text-fg-2 transition-colors group-hover:text-violet-soft" aria-hidden="true">
-      {c.casesPage.read}
-      <svg class="transition-transform duration-500 group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-    </p>
+    <div class="mt-auto pt-6">
+      <ul class="flex flex-wrap gap-x-5 gap-y-2 border-t border-line pt-4 text-xs text-muted">
+        {item.metrics.map((m) => (
+          <li><bdi dir="ltr" class="text-fg">{t(m.value, lang)}</bdi>{m.label && <> {t(m.label, lang)}</>}</li>
+        ))}
+      </ul>
+      <p class="mt-5 flex items-center gap-2 text-sm font-medium text-violet-soft transition-[gap] duration-300 group-hover:gap-3" aria-hidden="true">
+        {c.casesPage.read}
+        <svg class="flip-rtl" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L8.5 3.5M13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </p>
+    </div>
   </div>
 </article>

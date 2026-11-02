@@ -2,7 +2,7 @@
 
 A static, bilingual (English + Arabic RTL) executive site built with **Astro 7 + Tailwind CSS 4** and deployed on **Netlify**.
 
-- `/` home: Hero, About, Expertise, AI in Growth, Operating Stack, Career, Selected Clients, Regional, Results, Case Studies, Strategic Sessions (3-step intake form), FAQ, Contact
+- `/` home: Hero, Executive Snapshot, About, Leadership & Expertise, Career Journey, Selected Impact, Selected Case Studies, Leadership Philosophy, Insights & Perspectives, Opportunities & Contact (two inquiry paths and FAQ)
 - `/case-studies`: all 18 case studies, filterable by market, discipline and industry (filters sync to the URL, e.g. `?market=ksa&discipline=influencer`)
 - `/case-studies/[slug]`: one page per case study
 - `/ar`, `/ar/case-studies`, `/ar/case-studies/[slug]`: full Arabic version, RTL, IBM Plex Sans Arabic
@@ -41,7 +41,7 @@ npx netlify-cli deploy --build --prod
 ### After the first deploy
 
 1. **Enable form detection.** Netlify UI → **Site configuration → Forms → Enable form detection**, then trigger one more deploy (**Deploys → Trigger deploy**). Netlify only picks up forms on deploys made after detection is on.
-2. **Form notifications.** **Forms → Form notifications → Add notification → Email notification**. Send submissions of the `strategic-session` form to `mostafa.ali.sofy@gmail.com`. Both language versions submit to the same form, and a hidden `language` field tells you which one was used. Answers to the multiple-choice questions are always stored in English.
+2. **Form notifications.** **Forms → Form notifications → Add notification → Email notification**. There are two forms: `executive-opportunity` (recruiters and organizations) and `strategic-partnership` (founders and business owners). Add an email notification for each, sent to `mostafa.ali.sofy@gmail.com`. Both language versions submit to the same two forms; a hidden `language` field tells you which one was used, and the "Type of collaboration" answer is always stored in English.
 3. **Custom domain** (optional). **Domain management → Add a domain**. Then add an environment variable `SITE_URL` = `https://your-domain.com` (**Site configuration → Environment variables**) and redeploy, so canonical URLs, hreflang, Open Graph, the sitemap and robots.txt all use the custom domain. Without it, the site uses Netlify's own URL automatically.
 4. **Submit the sitemap** in Google Search Console: `https://your-domain.com/sitemap-index.xml`.
 
@@ -55,6 +55,7 @@ npx netlify-cli deploy --build --prod
 | `public/assets/mostafa-portrait-800-BwauKAu6.jpg` | About section portrait (Riyadh at night) |
 | `public/og-cover.jpg` (1200×630) | Social share image (WhatsApp, LinkedIn, X) |
 | `public/Sofy-Executive-Profile.pdf` | "Download PDF" link in Contact and the footer |
+| `public/assets/cases/*.webp` | Case-study cover photos (fashion, F&B, education). Assign one to a case with its `cover` field in `src/data/cases.ts`; cases without one get a typographic cover. |
 
 To swap a photo, overwrite the file with the same name and rebuild. You don't need to resize anything. Each build runs `scripts/optimize-images.mjs`, which turns the two portraits into responsive WebP and JPEG variants (4:5 crop, focused on the subject) in `public/img/`. That folder is generated and git-ignored.
 
@@ -78,6 +79,10 @@ npm run build && npm run preview
 
 `npm run build` does three things: it optimizes images, builds the static site into `dist/`, then runs a copy check that **fails the build** if any page contains an em dash, "TO CONFIRM" or "[CONFIRM]".
 
+## Design system
+
+"Executive Noir": all tokens (surfaces, text, violet accents, radii, timing, gradient) live at the top of `src/styles/global.css`. Typography is Instrument Serif for editorial headlines, Inter for interface and body text, and IBM Plex Sans Arabic for Arabic. Reusable classes: `.h-section`, `.t-display-xl`, `.t-h3`, `.kicker`, `.meta`, `.btn-primary`, `.btn-ghost`, `.surface`, `.tag`, `.field`.
+
 ## Editing content
 
 | What | Where |
@@ -93,9 +98,9 @@ npm run build && npm run preview
 
 - **SEO:** per-page titles and descriptions, canonical URLs, `hreflang` (en / ar / x-default), Open Graph and Twitter cards, `sitemap-index.xml` with language alternates, `robots.txt`. JSON-LD includes `Person` and `WebSite` on every page, `FAQPage` on the home page, `CollectionPage`/`ItemList` on the case index, and `Article` + `BreadcrumbList` on each case study.
 - **Performance:** fully static, self-hosted fonts (preloaded, `font-display: swap`, the Arabic font subset is only fetched when Arabic text is on screen), responsive WebP images with explicit dimensions, the LCP image preloaded with `fetchpriority="high"`, CSS inlined, only small vanilla scripts shipped, and immutable caching for `/_astro/*`.
-- **Accessibility:** semantic landmarks, skip link, visible focus states, native `<details>` FAQ, labelled form controls with per-step validation, `aria-pressed` filters, live-region result counts, and AA contrast on the dark palette.
+- **Accessibility:** semantic landmarks, skip link, visible focus states, native `<details>` FAQ, labelled form controls with inline validation, keyboard-operable tabs for the two inquiry paths, `aria-pressed` filters, live-region result counts, and AA contrast on the dark palette.
 - **Motion:** subtle scroll reveals (content stays visible without JS) and a hero entrance that never delays LCP. Everything is disabled under `prefers-reduced-motion`.
-- **Netlify Forms:** 3-step intake form with a honeypot and AJAX submit, plus a no-JS fallback to `/thank-you`.
+- **Netlify Forms:** two separate forms (Executive Opportunity, Strategic Partnership) with a honeypot, required-field validation, duplicate-submit protection, AJAX submit with real success and error states, plus a no-JS fallback to `/thank-you`.
 - **WhatsApp:** floating button linking to `wa.me/966568355046`. It sits bottom-right in English and bottom-left in Arabic.
 
 ## Lighthouse (local production build, mobile emulation)
@@ -103,8 +108,8 @@ npm run build && npm run preview
 | Page | Performance | Accessibility | Best Practices | SEO |
 |---|---|---|---|---|
 | `/` | 97 | 100 | 100 | 100 |
-| `/ar` | 100 | 100 | 100 | 100 |
+| `/ar` | 97 | 100 | 100 | 100 |
 | `/case-studies` | 100 | 100 | 100 | 100 |
-| `/ar/case-studies/perfume-brand` | 100 | 100 | 100 | 100 |
+| `/ar/case-studies/fashion-lifestyle-retailer` | 99 | 100 | 100 | 100 |
 
 Measured with the real photos in place.

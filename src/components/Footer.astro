@@ -7,34 +7,38 @@ interface Props { lang: Lang; onHome: boolean }
 const { lang, onHome } = Astro.props;
 const c = getContent(lang);
 const year = new Date().getFullYear();
+const links = [
+  { label: c.nav.about, href: homeAnchor(lang, 'about', onHome) },
+  { label: c.nav.leadership, href: homeAnchor(lang, 'leadership', onHome) },
+  { label: c.nav.impact, href: homeAnchor(lang, 'impact', onHome) },
+  { label: c.nav.cases, href: href(lang, '/case-studies') },
+  { label: c.nav.insights, href: homeAnchor(lang, 'insights', onHome) },
+  { label: c.nav.contact, href: homeAnchor(lang, 'contact', onHome) },
+];
 ---
 
-<footer class="border-t border-line pb-28 pt-16 sm:pb-16">
+<footer class="border-t border-line bg-ink-2 pb-28 pt-16 sm:pb-14">
   <div class="wrap">
-    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
       <div>
-        <a href={href(lang, '/')} class="brand block text-6xl leading-none sm:text-7xl" dir="ltr">Sofy<span class="text-violet-soft">.</span></a>
-        <p class="mt-5 max-w-sm text-sm leading-relaxed text-muted">{c.role}</p>
-        <p class="mt-2 text-sm text-fg-2">{c.locations}</p>
+        <a href={href(lang, '/')} class="brand block text-6xl leading-none" dir="ltr">Sofy<span class="text-violet-2">.</span></a>
+        <p class="mt-5 text-sm text-fg">{c.hero.title.join(' ')}</p>
+        <p class="mt-1 max-w-sm text-sm text-muted">{c.role}</p>
+        <p class="meta mt-4">{c.locations}</p>
       </div>
       <nav aria-label="Footer">
         <ul class="grid gap-3 text-sm text-fg-2">
-          <li><a class="hover:text-fg" href={homeAnchor(lang, 'about', onHome)}>{c.nav.about}</a></li>
-          <li><a class="hover:text-fg" href={href(lang, '/case-studies')}>{c.nav.cases}</a></li>
-          <li><a class="hover:text-fg" href={homeAnchor(lang, 'career', onHome)}>{c.nav.career}</a></li>
-          <li><a class="hover:text-fg" href={homeAnchor(lang, 'results', onHome)}>{c.nav.results}</a></li>
-          <li><a class="hover:text-fg" href={homeAnchor(lang, 'faq', onHome)}>{c.nav.faq}</a></li>
-          <li><a class="hover:text-fg" href={homeAnchor(lang, 'contact', onHome)}>{c.nav.contact}</a></li>
+          {links.map((l) => <li><a class="hover:text-fg" href={l.href}>{l.label}</a></li>)}
         </ul>
       </nav>
       <ul class="grid content-start gap-3 text-sm text-fg-2">
         <li><a class="hover:text-fg" href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
-        <li><a class="hover:text-fg" href={SITE.whatsappUrl} rel="noopener" target="_blank"><span dir="ltr">{SITE.whatsappDisplay}</span></a></li>
+        <li><a class="hover:text-fg" href={SITE.whatsappUrl} rel="noopener" target="_blank"><bdi dir="ltr">{SITE.whatsappDisplay}</bdi></a></li>
         <li><a class="hover:text-fg" href={SITE.linkedin} rel="noopener" target="_blank">{c.contact.linkedin}</a></li>
-        <li><a class="hover:text-fg" href={SITE.profilePdf} download>{c.contact.profile} (PDF)</a></li>
+        <li><a class="hover:text-fg" href={SITE.profilePdf} download>{c.nav.profile} (PDF)</a></li>
       </ul>
     </div>
-    <div class="mt-16 flex flex-col justify-between gap-4 border-t border-line pt-6 text-xs text-muted sm:flex-row">
+    <div class="mt-14 flex flex-col justify-between gap-4 border-t border-line pt-6 text-xs text-muted sm:flex-row">
       <p>© {year} {c.name}. {c.ui.rights}</p>
       <a href="#main" class="hover:text-fg">{c.ui.backToTop} ↑</a>
     </div>

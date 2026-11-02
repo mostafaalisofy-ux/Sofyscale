@@ -22,6 +22,16 @@ export interface CaseStudy {
   markets: MarketKey[];
   disciplines: DisciplineKey[];
   industries: IndustryKey[];
+  /** Cover photo in /public/assets/cases. Cases without one get a typographic cover. */
+  cover?: string;
+  /*
+   * Narrative fields for the full case-study format. Rendered only when filled in.
+   * Not yet supplied for any case; see CONFIRM.md.
+   */
+  challenge?: T;
+  role?: T;
+  approach?: T;
+  execution?: T;
 }
 
 export const FILTERS: {
@@ -233,6 +243,7 @@ export const CASES: CaseStudy[] = [
       'عملية أغذية ومشروبات محلية توسّعت بالإيقاع المنتظم، لا بالتجديد العابر.',
     ),
     markets: ['egypt'], disciplines: ['fnb'], industries: ['fnb'],
+    cover: '/assets/cases/fnb.webp',
   },
   {
     num: '10',
@@ -251,6 +262,7 @@ export const CASES: CaseStudy[] = [
       'عملاء محتملون بجودة تؤهلهم للتسجيل في أنحاء الخليج لصالح أكاديمية تعليمية.',
     ),
     markets: ['gcc'], disciplines: ['leadgen'], industries: ['education'],
+    cover: '/assets/cases/education.webp',
   },
   {
     num: '11',
@@ -341,6 +353,7 @@ export const CASES: CaseStudy[] = [
       'سلسلة تجزئة أزياء رافقت كل افتتاح فرع جديد في الخليج بموجة مخصصة من المؤثرين، فحوّلت التوسع إلى محرك متجدد للمحتوى والتفاعل بدلًا من حدث لمرة واحدة.',
     ),
     markets: ['gcc'], disciplines: ['influencer'], industries: ['fashion', 'retail'],
+    cover: '/assets/cases/fashion.webp',
   },
   {
     num: '16',
@@ -399,6 +412,6 @@ export const CASES: CaseStudy[] = [
 ];
 
 /** Featured on the home page */
-export const FEATURED = ['02', '07', '12', '03', '11', '13'];
+export const FEATURED = ['02', '15', '09'];
 
 export const t = (v: T | string, lang: Lang) => (typeof v === 'string' ? v : v[lang]);
