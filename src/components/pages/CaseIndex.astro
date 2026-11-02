@@ -52,7 +52,7 @@ const listLd = {
           <div class:list={['border-line py-6 pe-4', i % 2 === 1 && 'border-s border-line ps-4 sm:ps-6', i >= 2 && 'border-t sm:border-t-0', i === 2 && 'sm:border-s sm:ps-6']}>
             <dt class="sr-only">{s.label}</dt>
             <dd>
-              <span class="display block text-5xl leading-none tnum sm:text-6xl"><bdi dir="ltr">{s.value}</bdi></span>
+              <span class="display block whitespace-nowrap text-[clamp(2.25rem,10vw,3.75rem)] leading-none tnum"><bdi dir="ltr">{s.value}</bdi></span>
               <span class="mt-2 block text-sm text-fg-2">{s.label}</span>
               {s.note && <span class="block text-xs text-muted">{s.note}</span>}
             </dd>
@@ -65,11 +65,11 @@ const listLd = {
   <section class="pb-24" aria-label={p.kicker}>
     <div class="wrap">
       <div class="filters sticky top-[4.5rem] z-30 -mx-[var(--gutter)] border-y border-line bg-ink/85 px-[var(--gutter)] py-5 backdrop-blur-xl">
-        <div class="grid gap-4">
+        <div class="grid min-w-0 grid-cols-1 gap-4">
           {groups.map((g) => (
-            <div class="flex items-center gap-4" role="group" aria-label={g.label}>
+            <div class="flex min-w-0 items-center gap-4" role="group" aria-label={g.label}>
               <span class="w-20 flex-none text-xs uppercase tracking-[0.16em] text-muted sm:w-24">{g.label}</span>
-              <div class="-my-1 flex gap-2 overflow-x-auto py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div class="-my-1 flex min-w-0 flex-1 gap-2 overflow-x-auto py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <button type="button" class="pill" data-group={g.key} data-value="all" aria-pressed="true">{p.filters.all}</button>
                 {g.options.map((o) => (
                   <button type="button" class="pill" data-group={g.key} data-value={o.key} aria-pressed="false">{t(o.label, lang)}</button>

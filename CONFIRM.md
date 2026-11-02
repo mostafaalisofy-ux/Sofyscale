@@ -11,13 +11,13 @@ To change any value, edit `src/data/content.en.ts`, `src/data/content.ar.ts` or 
 | # | Where it appears | Content as published | File |
 |---|---|---|---|
 | 1 | Hero stat chips | **SAR 24M+** single-brand revenue | `content.*.ts` → `hero.chips` |
-| 2 | About stats | **4 Markets** (KSA · EG · Libya · GCC) | `content.*.ts` → `about.stats` |
+| 2 | About stats | ~~4 Markets~~ → no number, see section 2 | `content.*.ts` → `about.stats` |
 | 3 | AI in Growth, 01 (Problem) | Manual production caps testing at **5–10 variants per week** | `content.*.ts` → `ai.items[0]` |
 | 4 | AI in Growth, 01 (How it works) | **30–50** brief-ready variants weekly; briefs generated from **Mixpanel** drop-off signals | `content.*.ts` → `ai.items[0]` |
 | 5 | AI in Growth, 02 (Problem) | Teams burn **6–10 hours a week** on reports | `content.*.ts` → `ai.items[1]` |
 | 6 | AI in Growth, 03 (Problem) | Senior buyers spend **60%** of their time monitoring | `content.*.ts` → `ai.items[2]` |
 | 7 | AI in Growth, closing line | "None of these are theoretical. Each one was built inside a live engagement, against a live P&L, under a real budget." | `content.*.ts` → `ai.closing` |
-| 8 | Results | **4 Regional Markets** (KSA · EG · Libya · GCC) | `content.*.ts` → `results.stats` |
+| 8 | Results | ~~4 Regional Markets~~ → no number, see section 2 | `content.*.ts` → `results.stats` |
 | 9 | Results | **SAR 24M+** Peak Campaign Revenue, single-brand revenue in **11 months** | `content.*.ts` → `results.stats` |
 | 10 | Strategic Sessions | Scarcity note: "Due to ongoing regional projects and leadership commitments, only a limited number of strategic sessions are available each month." | `content.*.ts` → `sessions.scarcity` |
 
@@ -34,9 +34,19 @@ Dates, titles and markets now come from `Sofy-Executive-Profile.pdf`, which you 
 
 Arabic titles: العضو المنتدب، المدير القُطري، المدير القُطري ورئيس تطوير الأعمال، رئيس تطوير الأعمال، مدير تطوير الأعمال، مدير المبيعات، مسؤول أول تطوير أعمال المشاريع، مطوّر أعمال أول.
 
-### ⚠️ Still open: number of markets
+### ✅ Markets: no number
 
-The Executive Profile says **2 regional markets (KSA & Egypt)**. The site says **4 markets (KSA · EG · Libya · GCC)** in the About stats, the Results stats and the Case Studies header, and the case studies themselves include Libya and GCC work. Pick one number and it will be updated everywhere.
+As you asked, market counts no longer show a number. They now lead with the Gulf (Saudi Arabia and the UAE) plus Egypt:
+
+| Where | Now shows |
+|---|---|
+| Hero badge | KSA · UAE · EG, Multi-market |
+| About stats | GCC + EG, Markets: Saudi Arabia · UAE · Egypt |
+| Regional tagline | Egypt & the Gulf · One operator |
+| Results stats | GCC + EG, Regional Markets: Saudi Arabia · UAE · Egypt, across the wider Gulf |
+| Case Studies header | GCC + EG, Markets: KSA · UAE · Egypt & beyond (the case sample also includes Libya) |
+
+The Libya filter and case study 07 (Libya) are unchanged.
 
 ## 3. Selected Clients
 

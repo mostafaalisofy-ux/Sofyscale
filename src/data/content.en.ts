@@ -37,7 +37,7 @@ export const en: Content = {
     ],
     badges: [
       { value: '15+ Years', label: 'Regional leadership' },
-      { value: 'KSA · EG', label: 'Multi-market' },
+      { value: 'KSA · UAE · EG', label: 'Multi-market' },
     ],
     portraitAlt: 'Portrait of Mostafa Sofy',
   },
@@ -52,7 +52,7 @@ export const en: Content = {
     ],
     stats: [
       { value: '15+', label: 'Years Experience' },
-      { value: '4', label: 'Markets', note: 'KSA · EG · Libya · GCC' },
+      { value: 'GCC + EG', label: 'Markets', note: 'Saudi Arabia · UAE · Egypt' },
       { value: '20+', label: 'Industries Served' },
       { value: '18', label: 'Case Studies' },
     ],
@@ -183,7 +183,7 @@ export const en: Content = {
   regional: {
     kicker: 'Regional',
     headline: 'Building growth across Saudi Arabia & Egypt.',
-    tagline: 'Two markets · One operator',
+    tagline: 'Egypt & the Gulf · One operator',
     items: [
       { title: 'Saudi market experience', body: "Deep operational experience inside Saudi Arabia's competitive marketing landscape." },
       { title: 'Regional operations', body: 'Leading cross-border teams between KSA and Egypt.' },
@@ -198,7 +198,7 @@ export const en: Content = {
     headline: 'Numbers behind the work.',
     stats: [
       { value: '15+', label: 'Years Experience', note: 'Leading growth since 2010.' },
-      { value: '4', label: 'Regional Markets', note: 'KSA · EG · Libya · GCC.' },
+      { value: 'GCC + EG', label: 'Regional Markets', note: 'Saudi Arabia · UAE · Egypt, across the wider Gulf.' },
       { value: '20+', label: 'Industries Served', note: 'F&B · Retail · Real Estate · Automotive · Healthcare · Finance · Telecom · Hospitality & more.' },
       { value: '13x', label: 'Peak ROAS', note: 'Highest recorded campaign return.' },
       { value: 'SAR 24M+', label: 'Peak Campaign Revenue', note: 'Single-brand revenue in 11 months' },
@@ -298,7 +298,7 @@ export const en: Content = {
     sub: '18 anonymized engagements across MENA. Live ad accounts. Live analytics. Names confidential, numbers documented.',
     stats: [
       { value: '18', label: 'Engagements' },
-      { value: '4', label: 'Markets', note: 'KSA · EG · LY · GCC' },
+      { value: 'GCC + EG', label: 'Markets', note: 'KSA · UAE · Egypt & beyond' },
       { value: '11', label: 'Industries', note: 'case sample' },
       { value: '13x', label: 'Peak ROAS' },
     ],
