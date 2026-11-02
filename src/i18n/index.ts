@@ -6,10 +6,14 @@ export const content: Record<Lang, Content> = { en, ar };
 
 export const getContent = (lang: Lang) => content[lang];
 
-/** Prefix a root-relative path with the locale. `path` must start with "/". */
+/**
+ * Prefix a root-relative path with the locale. `path` must start with "/".
+ * Page URLs always end with "/" to match how Netlify serves directory pages
+ * (it 301-redirects "/ar" to "/ar/"), so links and canonicals never redirect.
+ */
 export function href(lang: Lang, path = '/') {
-  if (lang === 'en') return path;
-  return path === '/' ? '/ar' : `/ar${path}`;
+  const p = path === '/' ? '' : path.replace(/\/$/, '');
+  return lang === 'en' ? `${p}/` : `/ar${p}/`;
 }
 
 /** Anchor on the home page, usable from any page. */

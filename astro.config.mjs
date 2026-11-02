@@ -9,7 +9,7 @@ const site = process.env.SITE_URL || process.env.URL || 'https://sofy.netlify.ap
 export default defineConfig({
   site,
   output: 'static',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   build: { format: 'directory', inlineStylesheets: 'always' },
   compressHTML: true,
   integrations: [
