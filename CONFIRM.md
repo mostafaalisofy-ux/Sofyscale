@@ -69,4 +69,4 @@ These were not specified in `site-content.md`:
 5. **Case study filter tagging.** Multi-tagged where the category lists several, for example 13 Food Delivery is tagged KSA and GCC. 14 QSR is tagged Influencer Marketing (discipline) and F&B (industry). 15, 16 and 17 are tagged Retail.
 6. **Arabic translation.** Professional Gulf-friendly MSA throughout. Brand and company names stay in Latin script, except Al-Jazeera Paints → دهانات الجزيرة. Figures stay as Latin numerals ("13x", "SAR 24M+") for consistency with ad-platform reporting. A native-speaker read is recommended.
 7. **Site URL.** On Netlify the site uses Netlify's own `URL` variable automatically. Set `SITE_URL` once you have a custom domain (see README).
-8. **Assets.** All 4 asset files are placeholders, because the build environment could not reach sofy.lovable.app (see README → "Replace the placeholder assets").
+8. **Executive Profile PDF.** Its cover still lists the old website, `sofy.lovable.app`. Update the link in the PDF once the new domain is live.

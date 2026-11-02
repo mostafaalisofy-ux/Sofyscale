@@ -14,7 +14,7 @@ export const SITE = {
 
 /** Source images as they lived on the old site. Optimized variants are generated into /public/img at build. */
 export const IMAGES = {
-  hero: { src: '/assets/mostafa-hero-1200-LEdzBiIY.jpg', base: 'hero', widths: [480, 800, 1200] },
+  hero: { src: '/assets/mostafa-hero-1200-LEdzBiIY.jpg', base: 'hero', widths: [480, 800, 1120] },
   portrait: { src: '/assets/mostafa-portrait-800-BwauKAu6.jpg', base: 'portrait', widths: [400, 600, 800] },
 } as const;
 

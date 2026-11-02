@@ -47,24 +47,16 @@ npx netlify-cli deploy --build --prod
 
 ---
 
-## Replace the placeholder assets ⚠️
+## Assets
 
-The build environment couldn't reach `sofy.lovable.app` (blocked by the network), so these 4 files are **generated placeholders** with the correct filenames. Download the originals and drop them in place, keeping the exact names:
+| File | Used for |
+|---|---|
+| `public/assets/mostafa-hero-1200-LEdzBiIY.jpg` | Hero portrait (studio headshot) |
+| `public/assets/mostafa-portrait-800-BwauKAu6.jpg` | About section portrait (Riyadh at night) |
+| `public/og-cover.jpg` (1200×630) | Social share image (WhatsApp, LinkedIn, X) |
+| `public/Sofy-Executive-Profile.pdf` | "Download PDF" link in Contact and the footer |
 
-| Upload this file | To | Source |
-|---|---|---|
-| `mostafa-hero-1200-LEdzBiIY.jpg` | `public/assets/` | https://sofy.lovable.app/assets/mostafa-hero-1200-LEdzBiIY.jpg |
-| `mostafa-portrait-800-BwauKAu6.jpg` | `public/assets/` | https://sofy.lovable.app/assets/mostafa-portrait-800-BwauKAu6.jpg |
-| `og-cover.jpg` (1200×630) | `public/` | https://sofy.lovable.app/og-cover.jpg |
-| `Sofy-Executive-Profile.pdf` | `public/` | https://sofy.lovable.app/Sofy-Executive-Profile.pdf |
-
-You can fetch them in one go from your own machine:
-
-```bash
-curl -L -o public/assets/mostafa-hero-1200-LEdzBiIY.jpg https://sofy.lovable.app/assets/mostafa-hero-1200-LEdzBiIY.jpg && curl -L -o public/assets/mostafa-portrait-800-BwauKAu6.jpg https://sofy.lovable.app/assets/mostafa-portrait-800-BwauKAu6.jpg && curl -L -o public/og-cover.jpg https://sofy.lovable.app/og-cover.jpg && curl -L -o public/Sofy-Executive-Profile.pdf https://sofy.lovable.app/Sofy-Executive-Profile.pdf
-```
-
-You don't need to resize anything. Each build runs `scripts/optimize-images.mjs`, which turns the two portraits into responsive WebP and JPEG variants (4:5 crop, focused on the subject) in `public/img/`. That folder is generated and git-ignored. To recreate the placeholders, run `npm run placeholders` (add `-- --force` to overwrite existing files).
+To swap a photo, overwrite the file with the same name and rebuild. You don't need to resize anything. Each build runs `scripts/optimize-images.mjs`, which turns the two portraits into responsive WebP and JPEG variants (4:5 crop, focused on the subject) in `public/img/`. That folder is generated and git-ignored.
 
 ---
 
@@ -110,9 +102,9 @@ npm run build && npm run preview
 
 | Page | Performance | Accessibility | Best Practices | SEO |
 |---|---|---|---|---|
-| `/` | 98 | 100 | 100 | 100 |
+| `/` | 97 | 100 | 100 | 100 |
 | `/ar` | 100 | 100 | 100 | 100 |
 | `/case-studies` | 100 | 100 | 100 | 100 |
 | `/ar/case-studies/perfume-brand` | 100 | 100 | 100 | 100 |
 
-Measured with placeholder images. Real photos are compressed by the build pipeline, so scores should stay at this level. Re-run Lighthouse once the real assets are in.
+Measured with the real photos in place.
